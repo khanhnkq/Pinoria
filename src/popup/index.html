@@ -7,31 +7,35 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <main>
-      <header>
-        <img class="brand-mark" src="/icons/icon-48.png" width="40" height="40" alt="" aria-hidden="true" />
+    <main class="popup-shell">
+      <header class="brand-header">
+        <img class="brand-mark" src="/icons/icon-48.png" width="52" height="52" alt="" aria-hidden="true" />
         <div class="header-copy">
-          <h1>Phân loại tải xuống</h1>
-          <p>Mỗi màu tương ứng với một folder.</p>
+          <h1>Pinoria</h1>
+          <p>Configure download buttons</p>
         </div>
       </header>
 
       <form id="settings-form">
         <div class="section-heading">
-          <label id="targets-label">Folder &amp; màu nút</label>
+          <label id="targets-label">Folders &amp; download colors</label>
           <span id="target-limit"></span>
         </div>
         <ul id="targets-list" aria-labelledby="targets-label"></ul>
 
-        <button id="add-target" class="secondary-button" type="button">
-          <span aria-hidden="true">＋</span> Thêm folder
+        <button id="add-target" class="add-button" type="button">
+          <span class="add-icon" aria-hidden="true">＋</span>
+          <span>Add folder</span>
         </button>
 
         <p class="hint">
-          Đường dẫn nằm trong Downloads, ví dụ Pinterest/Kim Ji Won. Mỗi folder tự phân loại thành Ảnh, Video và GIF.
+          Every destination lives inside Downloads and automatically separates images, videos and GIFs.
         </p>
 
-        <button class="primary-button" type="submit">Lưu các nút tải</button>
+        <button class="primary-button" type="submit">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11l3 3v13H5V4Zm3 0v6h8V4M8 20v-7h8v7" /></svg>
+          <span class="button-label">Save settings</span>
+        </button>
         <p id="status" role="status" aria-live="polite"></p>
       </form>
     </main>

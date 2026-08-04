@@ -33,12 +33,19 @@ let statusTimer: number | undefined
 function clearStatus() {
   if (statusTimer !== undefined) window.clearTimeout(statusTimer)
   status.textContent = ''
+  delete status.dataset.state
 }
 
-function showStatus(message: string) {
+function showStatus(message: string, state: 'success' | 'error' = 'success') {
   clearStatus()
   status.textContent = message
+  status.dataset.state = state
   statusTimer = window.setTimeout(() => { status.textContent = '' }, 3200)
+}
+
+function getFolderInitial(folder: string, index: number): string {
+  const lastSegment = folder.split('/').filter(Boolean).at(-1)?.trim()
+  return lastSegment?.charAt(0).toUpperCase() || String(index + 1)
 }
 
 function createDeleteIcon(): SVGSVGElement {
@@ -63,28 +70,32 @@ function renderTargets() {
     const colorLabel = document.createElement('label')
     colorLabel.className = 'color-picker'
     colorLabel.title = `Chọn màu cho ${target.folder}`
+    colorLabel.style.setProperty('--target-color', target.color)
     const colorText = document.createElement('span')
     colorText.className = 'sr-only'
     colorText.textContent = `Màu nút tải ${index + 1}`
+    const folderInitial = document.createElement('span')
+    folderInitial.className = 'folder-initial'
+    folderInitial.setAttribute('aria-hidden', 'true')
+    folderInitial.textContent = getFolderInitial(target.folder, index)
     const colorInput = document.createElement('input')
     colorInput.type = 'color'
     colorInput.value = target.color
     colorInput.setAttribute('aria-label', `Màu nút tải ${index + 1}`)
     colorInput.addEventListener('input', () => {
       target.color = colorInput.value
+      colorLabel.style.setProperty('--target-color', colorInput.value)
       clearStatus()
     })
-    colorLabel.append(colorText, colorInput)
+    colorLabel.append(colorText, folderInitial, colorInput)
 
     const folderField = document.createElement('label')
     folderField.className = 'folder-field'
     const folderLabel = document.createElement('span')
     folderLabel.className = 'sr-only'
     folderLabel.textContent = `Đường dẫn folder ${index + 1}`
-    const prefix = document.createElement('span')
-    prefix.className = 'folder-prefix'
-    prefix.setAttribute('aria-hidden', 'true')
-    prefix.textContent = 'Downloads/'
+    const folderCopy = document.createElement('span')
+    folderCopy.className = 'folder-copy'
     const folderInput = document.createElement('input')
     folderInput.type = 'text'
     folderInput.name = `folder-${target.id}`
@@ -93,12 +104,20 @@ function renderTargets() {
     folderInput.autocomplete = 'off'
     folderInput.spellcheck = false
     folderInput.setAttribute('aria-label', `Đường dẫn folder ${index + 1}`)
+    const pathPreview = document.createElement('span')
+    pathPreview.className = 'folder-path-preview'
+    pathPreview.id = `folder-path-${target.id}`
+    pathPreview.textContent = `Downloads/${target.folder}`
+    folderInput.setAttribute('aria-describedby', pathPreview.id)
     folderInput.addEventListener('input', () => {
       target.folder = folderInput.value
       colorLabel.title = `Chọn màu cho ${folderInput.value || `folder ${index + 1}`}`
+      folderInitial.textContent = getFolderInitial(folderInput.value, index)
+      pathPreview.textContent = `Downloads/${folderInput.value}`
       clearStatus()
     })
-    folderField.append(folderLabel, prefix, folderInput)
+    folderCopy.append(folderInput, pathPreview)
+    folderField.append(folderLabel, folderCopy)
 
     const deleteButton = document.createElement('button')
     deleteButton.type = 'button'
@@ -116,7 +135,8 @@ function renderTargets() {
     list.append(item)
   })
 
-  limit.textContent = `${targets.length}/${MAX_DOWNLOAD_TARGETS}`
+  limit.textContent = `${targets.length} active`
+  limit.title = `Maximum ${MAX_DOWNLOAD_TARGETS} folders`
   addButton.disabled = targets.length >= MAX_DOWNLOAD_TARGETS
 }
 
@@ -132,17 +152,23 @@ addButton.addEventListener('click', () => {
 form.addEventListener('submit', (event) => {
   event.preventDefault()
   const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')
+  const buttonLabel = button?.querySelector<HTMLElement>('.button-label')
   if (button) button.disabled = true
-  status.textContent = 'Đang lưu…'
+  if (buttonLabel) buttonLabel.textContent = 'Saving…'
+  status.textContent = 'Saving your download folders…'
+  delete status.dataset.state
 
   void saveDownloadTargets(targets)
     .then((savedTargets) => {
       targets = savedTargets
       renderTargets()
-      showStatus('Đã cập nhật các nút tải trên Pinterest.')
+      showStatus('Download buttons updated on Pinterest.')
     })
-    .catch(() => { status.textContent = 'Không thể lưu. Hãy thử lại.' })
-    .finally(() => { if (button) button.disabled = false })
+    .catch(() => { showStatus('Could not save. Please try again.', 'error') })
+    .finally(() => {
+      if (button) button.disabled = false
+      if (buttonLabel) buttonLabel.textContent = 'Save settings'
+    })
 })
 
 void loadDownloadTargets()
@@ -150,4 +176,4 @@ void loadDownloadTargets()
     targets = storedTargets
     renderTargets()
   })
-  .catch(() => { status.textContent = 'Không thể đọc cài đặt hiện tại.' })
+  .catch(() => { showStatus('Could not load your current settings.', 'error') })
