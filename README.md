@@ -31,8 +31,9 @@
 Để cài đặt và sử dụng Pinoria ngay lập tức, bạn có thể sử dụng bản đóng gói sẵn (Release) theo các bước dưới đây:
 
 ### Bước 1: Tải bản Release
-- Bản ZIP đóng gói sẵn mới nhất nằm tại thư mục `releases/` trong mã nguồn dự án: [releases/pinoria-v0.3.0.zip](releases/pinoria-v0.3.0.zip).
-- Hoặc bạn có thể tải trực tiếp file zip này từ mục Releases trên GitHub (nếu dự án được đưa lên GitHub).
+- Truy cập vào trang Releases của dự án trên GitHub: [GitHub Releases](https://github.com/khanhnkq/Pinoria/releases).
+- Tìm phiên bản mới nhất và tải xuống tệp tin nén `pinoria-v0.3.0.zip` tại phần **Assets**.
+- *(Hoặc bạn cũng có thể tải trực tiếp file từ thư mục [releases/pinoria-v0.3.0.zip](releases/pinoria-v0.3.0.zip) trong mã nguồn dự án).*
 
 ### Bước 2: Giải nén tập tin
 - Giải nén tệp tin `pinoria-v0.3.0.zip` vừa tải về. 
