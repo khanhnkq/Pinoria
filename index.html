@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pinoria - Private and Local-First Pinterest Downloader</title>
+    <meta
+      name="description"
+      content="Pinoria is a private, local-first Chrome extension for downloading Pinterest images, videos, and animated media in original quality."
+    />
+    <link rel="icon" type="image/png" href="./icons/icon-32.png" />
+    <link rel="stylesheet" href="./src/landing/styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="https://github.com/khanhnkq/Pinoria" aria-label="Pinoria repository homepage">
+          <img class="brand-mark" src="./icons/icon-128.png" width="48" height="48" alt="Pinoria logo" />
+          <span>Pinoria</span>
+        </a>
+        <nav class="header-links" aria-label="Repository links">
+          <a class="header-link" href="https://github.com/khanhnkq/Pinoria/releases">Releases</a>
+          <a class="header-link" href="https://github.com/khanhnkq/Pinoria">Source</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <p class="eyebrow">Private and local-first</p>
+        <h1>Download Pinterest media directly on your computer, with native-feeling controls.</h1>
+        <p class="hero-copy">
+          Pinoria is a Manifest V3 extension for Chromium browsers. It helps you save Pinterest images, videos with
+          audio, and animated media in original quality while keeping all processing inside your browser.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-button" href="https://github.com/khanhnkq/Pinoria/releases">Get latest release</a>
+          <a class="secondary-button" href="https://github.com/khanhnkq/Pinoria">Read on GitHub</a>
+        </div>
+      </section>
+
+      <section class="section-block" aria-labelledby="features-title">
+        <h2 id="features-title" class="section-title">Core features</h2>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3>One-click Quick Download</h3>
+            <p>
+              Hover or focus any pin on home, search, or board pages to reveal quick download controls. Save images,
+              animated files, or MP4 video assets immediately.
+            </p>
+          </article>
+          <article class="feature-card">
+            <h3>Board and Section batch download</h3>
+            <p>
+              Use the board download control near the Pinterest board search area. Pinoria scans in batches, avoids
+              duplicates, and shows visible scan and download progress.
+            </p>
+          </article>
+          <article class="feature-card">
+            <h3>Color-coded destination folders</h3>
+            <p>
+              Configure up to six destination folders under your Downloads directory. Each folder is mapped to a color
+              so you can route media to the right location in one click.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" aria-labelledby="how-it-works-title">
+        <h2 id="how-it-works-title" class="section-title">How it works</h2>
+        <div class="steps-grid">
+          <article class="step-card">
+            <h3>1. Install from Releases</h3>
+            <p>
+              Download the latest packaged version from the repository Releases page, then extract the archive on your
+              machine.
+            </p>
+          </article>
+          <article class="step-card">
+            <h3>2. Load unpacked extension</h3>
+            <p>
+              Open <code>chrome://extensions</code>, enable Developer mode, click Load unpacked, and select the
+              extracted folder that contains <code>manifest.json</code>.
+            </p>
+          </article>
+          <article class="step-card">
+            <h3>3. Configure and download</h3>
+            <p>
+              Open the Pinoria popup, set your folder list and colors, then use quick download on pins or run a full
+              board download.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" aria-labelledby="privacy-title">
+        <h2 id="privacy-title" class="section-title">Privacy and safety</h2>
+        <article class="privacy-card">
+          <p>
+            Pinoria does not require an account and does not use analytics. Download and media handling stay local in
+            your browser session. The extension requests only the permissions needed for downloads, storage, and
+            Pinterest page integration.
+          </p>
+        </article>
+      </section>
+
+      <section class="section-block" aria-labelledby="dev-title">
+        <h2 id="dev-title" class="section-title">Developer commands</h2>
+        <div class="command-grid">
+          <article class="command-card">
+            <h3>Run development server</h3>
+            <pre><code>npm run dev</code></pre>
+          </article>
+          <article class="command-card">
+            <h3>Build extension package</h3>
+            <pre><code>npm run build</code></pre>
+          </article>
+          <article class="command-card">
+            <h3>Run all checks</h3>
+            <pre><code>npm run check</code></pre>
+          </article>
+          <article class="command-card">
+            <h3>Run test suite</h3>
+            <pre><code>npm run test</code></pre>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" aria-labelledby="permissions-title">
+        <h2 id="permissions-title" class="section-title">Permissions summary</h2>
+        <div class="permission-list">
+          <article class="permission-item">
+            <h3>downloads</h3>
+            <p>Save files directly on your computer.</p>
+          </article>
+          <article class="permission-item">
+            <h3>storage</h3>
+            <p>Persist your folder and color configuration locally.</p>
+          </article>
+          <article class="permission-item">
+            <h3>activeTab</h3>
+            <p>Integrate controls into the currently open Pinterest tab.</p>
+          </article>
+          <article class="permission-item">
+            <h3>Host permissions</h3>
+            <p>Access Pinterest and pinimg resources required for media extraction and download.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block footer-cta">
+        <h2>Ready to use Pinoria?</h2>
+        <p>Get the latest build from GitHub Releases and start downloading with private, local-first controls.</p>
+        <a class="primary-button" href="https://github.com/khanhnkq/Pinoria/releases">Open Releases</a>
+      </section>
+    </main>
+  </body>
+</html>
