@@ -36,7 +36,7 @@
 
 ### Bước 2: Giải nén tập tin
 - Giải nén tệp tin `pinoria-v0.3.0.zip` vừa tải về. 
-- Bạn sẽ thu được một thư mục có tên là `pinoria` chứa các file mã nguồn đã biên dịch (trong đó có file `manifest.json`).
+- Bạn sẽ thu được một thư mục có tên là `pinoria` chứa các tệp đã biên dịch chạy trực tiếp (trong đó có tệp `manifest.json`).
 
 ### Bước 3: Cài đặt vào trình duyệt Chromium (Chrome, Edge, Brave, Cốc Cốc,...)
 1. Mở trình duyệt và truy cập vào trang quản lý tiện ích mở rộng bằng cách nhập địa chỉ: `chrome://extensions/`
