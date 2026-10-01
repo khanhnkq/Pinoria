@@ -1,3 +1,7 @@
+export {
+  getExtensionApi,
+  supportsOffscreenDocuments,
+} from './extension-api'
 export { extractPinterestPage, parsePinterestPageContext } from './extractors/pinterest-extractor'
 export { PINTEREST_SELECTORS } from './extractors/pinterest-selectors'
 export {

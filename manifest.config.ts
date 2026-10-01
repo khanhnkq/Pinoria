@@ -1,5 +1,8 @@
 import { defineManifest } from '@crxjs/vite-plugin'
 
+const isFirefox = process.env.PINORIA_TARGET === 'firefox'
+const firefoxExtensionId = process.env.FIREFOX_EXTENSION_ID?.trim() || 'pinoria@khanhnkq.github.io'
+
 export default defineManifest({
   manifest_version: 3,
   name: 'Pinoria',
@@ -20,10 +23,15 @@ export default defineManifest({
     default_title: 'Cài đặt Pinoria',
     default_popup: 'src/popup/index.html',
   },
-  background: {
-    service_worker: 'src/background/service-worker.ts',
-    type: 'module',
-  },
+  background: isFirefox
+    ? {
+        scripts: ['src/background/service-worker.ts'],
+        type: 'module',
+      }
+    : {
+        service_worker: 'src/background/service-worker.ts',
+        type: 'module',
+      },
   content_scripts: [
     {
       matches: ['https://*.pinterest.com/*'],
@@ -37,9 +45,23 @@ export default defineManifest({
       run_at: 'document_idle',
     },
   ],
-  permissions: ['activeTab', 'downloads', 'offscreen', 'storage'],
+  permissions: isFirefox
+    ? ['activeTab', 'downloads', 'storage']
+    : ['activeTab', 'downloads', 'offscreen', 'storage'],
   host_permissions: [
     'https://*.pinterest.com/*',
     'https://*.pinimg.com/*',
   ],
+  ...(isFirefox
+    ? {
+        browser_specific_settings: {
+          gecko: {
+            id: firefoxExtensionId,
+            // Pinoria is local-first: no accounts, analytics, or remote servers.
+            data_collection_permissions: { required: ['none'] },
+            strict_min_version: '128.0',
+          },
+        },
+      }
+    : {}),
 })
