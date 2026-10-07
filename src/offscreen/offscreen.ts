@@ -104,7 +104,7 @@ async function createMuxTarget(): Promise<MuxTargetContext> {
     return {
       target,
       getBlob: async () => {
-        if (!target.buffer) throw new Error('MP4 sau khi ghép không có dữ liệu')
+        if (!target.buffer) throw new Error('Muxed MP4 contains no data')
         return new Blob([target.buffer], { type: 'video/mp4' })
       },
       cleanup: async () => undefined,
@@ -117,10 +117,10 @@ function validateRequest(request: MuxDownloadRequest): void {
     !isPinterestMediaUrl(request.videoUrl) ||
     (request.audioUrl !== undefined && !isPinterestMediaUrl(request.audioUrl))
   ) {
-    throw new Error('Nguồn ghép media không thuộc Pinterest CDN')
+    throw new Error('Media mux source does not belong to Pinterest CDN')
   }
   if (!/^Pinoria\/[^/]+\.mp4$/i.test(request.filename)) {
-    throw new Error('Tên file MP4 không hợp lệ')
+    throw new Error('Invalid MP4 filename')
   }
 }
 
@@ -150,8 +150,8 @@ async function muxMedia(request: MuxDownloadRequest): Promise<{
       videoInput.getVideoTracks(),
       audioInput?.getAudioTracks() ?? [],
     ])
-    if (videoTracks.length === 0) throw new Error('Nguồn media không có track video')
-    if (audioInput && audioTracks.length === 0) throw new Error('Nguồn media không có track audio')
+    if (videoTracks.length === 0) throw new Error('Media source has no video track')
+    if (audioInput && audioTracks.length === 0) throw new Error('Media source has no audio track')
 
     const videoConversion = await Conversion.init({
       input: videoInput,
@@ -172,7 +172,7 @@ async function muxMedia(request: MuxDownloadRequest): Promise<{
         })
       : undefined
     const conversions = [videoConversion, ...(audioConversion ? [audioConversion] : [])]
-    if (!output.hasEnoughTracks()) throw new Error('Không thể tạo MP4 từ nguồn Pinterest')
+    if (!output.hasEnoughTracks()) throw new Error('Unable to create MP4 from Pinterest source')
 
     await output.start()
     for (let until = 5; ; until += 5) {
@@ -231,14 +231,14 @@ chrome.runtime.onMessage.addListener((message: unknown, sender, sendResponse) =>
   }
   if (!isMuxDownloadRequest(message)) return false
   if (sender.id !== chrome.runtime.id) {
-    sendResponse({ ok: false, error: 'Yêu cầu ghép media không thuộc Pinoria' } satisfies MuxDownloadResponse)
+    sendResponse({ ok: false, error: 'Mux request does not belong to Pinoria' } satisfies MuxDownloadResponse)
     return false
   }
 
   void enqueueMux(message)
     .then((objectUrl) => sendResponse({ ok: true, objectUrl } satisfies MuxDownloadResponse))
     .catch((error: unknown) => {
-      const errorMessage = error instanceof Error ? error.message : 'Không thể ghép video và audio'
+      const errorMessage = error instanceof Error ? error.message : 'Unable to mux video and audio'
       sendResponse({ ok: false, error: errorMessage } satisfies MuxDownloadResponse)
     })
   return true

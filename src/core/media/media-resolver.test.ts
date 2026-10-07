@@ -147,7 +147,7 @@ describe('resolveMediaAsset', () => {
       ? undefined
       : verified(candidate, 'mp4', 'video/mp4')
 
-    await expect(resolveMediaAsset(media, { probe })).rejects.toThrow('track audio')
+    await expect(resolveMediaAsset(media, { probe })).rejects.toThrow('audio track')
   })
 })
 

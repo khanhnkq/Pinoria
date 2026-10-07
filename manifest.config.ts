@@ -17,7 +17,7 @@ export default defineManifest({
       16: 'icons/icon-16.png',
       32: 'icons/icon-32.png',
     },
-    default_title: 'Cài đặt Pinoria',
+    default_title: 'Pinoria Settings',
     default_popup: 'src/popup/index.html',
   },
   background: {
@@ -26,13 +26,13 @@ export default defineManifest({
   },
   content_scripts: [
     {
-      matches: ['https://*.pinterest.com/*'],
+      matches: ['https://*.pinterest.com/*', 'https://pinterest.com/*'],
       js: ['src/main-world/hls-bridge.ts'],
       run_at: 'document_start',
       world: 'MAIN',
     },
     {
-      matches: ['https://*.pinterest.com/*'],
+      matches: ['https://*.pinterest.com/*', 'https://pinterest.com/*'],
       js: ['src/content/content-script.ts'],
       run_at: 'document_idle',
     },
@@ -40,6 +40,7 @@ export default defineManifest({
   permissions: ['activeTab', 'downloads', 'offscreen', 'storage'],
   host_permissions: [
     'https://*.pinterest.com/*',
+    'https://pinterest.com/*',
     'https://*.pinimg.com/*',
   ],
 })

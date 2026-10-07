@@ -17,7 +17,7 @@ const TARGET_COLORS = [
 
 function requiredElement<ElementType extends Element>(selector: string): ElementType {
   const element = document.querySelector<ElementType>(selector)
-  if (!element) throw new Error('Không thể khởi tạo cài đặt Pinoria')
+  if (!element) throw new Error('Unable to initialize Pinoria settings')
   return element
 }
 
@@ -69,11 +69,11 @@ function renderTargets() {
 
     const colorLabel = document.createElement('label')
     colorLabel.className = 'color-picker'
-    colorLabel.title = `Chọn màu cho ${target.folder}`
+    colorLabel.title = `Select color for ${target.folder}`
     colorLabel.style.setProperty('--target-color', target.color)
     const colorText = document.createElement('span')
     colorText.className = 'sr-only'
-    colorText.textContent = `Màu nút tải ${index + 1}`
+    colorText.textContent = `Button color ${index + 1}`
     const folderInitial = document.createElement('span')
     folderInitial.className = 'folder-initial'
     folderInitial.setAttribute('aria-hidden', 'true')
@@ -81,7 +81,7 @@ function renderTargets() {
     const colorInput = document.createElement('input')
     colorInput.type = 'color'
     colorInput.value = target.color
-    colorInput.setAttribute('aria-label', `Màu nút tải ${index + 1}`)
+    colorInput.setAttribute('aria-label', `Button color ${index + 1}`)
     colorInput.addEventListener('input', () => {
       target.color = colorInput.value
       colorLabel.style.setProperty('--target-color', colorInput.value)
@@ -93,7 +93,7 @@ function renderTargets() {
     folderField.className = 'folder-field'
     const folderLabel = document.createElement('span')
     folderLabel.className = 'sr-only'
-    folderLabel.textContent = `Đường dẫn folder ${index + 1}`
+    folderLabel.textContent = `Folder path ${index + 1}`
     const folderCopy = document.createElement('span')
     folderCopy.className = 'folder-copy'
     const folderInput = document.createElement('input')
@@ -103,7 +103,7 @@ function renderTargets() {
     folderInput.maxLength = 180
     folderInput.autocomplete = 'off'
     folderInput.spellcheck = false
-    folderInput.setAttribute('aria-label', `Đường dẫn folder ${index + 1}`)
+    folderInput.setAttribute('aria-label', `Folder path ${index + 1}`)
     const pathPreview = document.createElement('span')
     pathPreview.className = 'folder-path-preview'
     pathPreview.id = `folder-path-${target.id}`
@@ -111,7 +111,7 @@ function renderTargets() {
     folderInput.setAttribute('aria-describedby', pathPreview.id)
     folderInput.addEventListener('input', () => {
       target.folder = folderInput.value
-      colorLabel.title = `Chọn màu cho ${folderInput.value || `folder ${index + 1}`}`
+      colorLabel.title = `Select color for ${folderInput.value || `folder ${index + 1}`}`
       folderInitial.textContent = getFolderInitial(folderInput.value, index)
       pathPreview.textContent = `Downloads/${folderInput.value}`
       clearStatus()
@@ -123,7 +123,7 @@ function renderTargets() {
     deleteButton.type = 'button'
     deleteButton.className = 'delete-button'
     deleteButton.disabled = disableDelete
-    deleteButton.setAttribute('aria-label', `Xóa folder ${target.folder}`)
+    deleteButton.setAttribute('aria-label', `Delete folder ${target.folder}`)
     deleteButton.append(createDeleteIcon())
     deleteButton.addEventListener('click', () => {
       targets = targets.filter(({ id }) => id !== target.id)

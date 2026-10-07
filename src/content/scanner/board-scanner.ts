@@ -274,7 +274,7 @@ export function createBoardScanner({
       }
 
       if (!isSupportedContext(context)) {
-        finish('error', 'unsupported-page', 'Chỉ có thể quét trang board hoặc section Pinterest.')
+        finish('error', 'unsupported-page', 'Can only scan Pinterest board or section pages.')
         return cloneSnapshot()
       }
 

@@ -58,7 +58,10 @@ function normalizeMediaUrl(
     const url = new URL(value, baseUrl)
 
     if (allowBlob && url.protocol === 'blob:') return url.href
-    if (url.protocol !== 'https:' || !isPinterestHostname(url.hostname, 'pinimg.com')) {
+    if (
+      url.protocol !== 'https:' ||
+      (!isPinterestHostname(url.hostname, 'pinimg.com') && !isPinterestHostname(url.hostname, 'pinterest.com'))
+    ) {
       return undefined
     }
 
@@ -132,7 +135,8 @@ function extractImageAsset(
 ): PinMediaAsset | undefined {
   if (isIgnoredImage(image)) return undefined
 
-  const sourceUrl = normalizeMediaUrl(image.currentSrc || image.getAttribute('src'), pageUrl)
+  const rawSrc = image.currentSrc || image.getAttribute('src') || image.src
+  const sourceUrl = normalizeMediaUrl(rawSrc, pageUrl)
   const elementWidth = readPositiveNumber(image.getAttribute('width'))
   const elementHeight = readPositiveNumber(image.getAttribute('height'))
   const candidates: MediaCandidate[] = []
@@ -146,7 +150,8 @@ function extractImageAsset(
     })
   }
 
-  candidates.push(...parseSrcset(image.getAttribute('srcset'), pageUrl))
+  const rawSrcset = image.getAttribute('srcset') || image.srcset
+  candidates.push(...parseSrcset(rawSrcset, pageUrl))
   const uniqueCandidates = deduplicateCandidates(candidates)
   if (uniqueCandidates.length === 0) return undefined
 

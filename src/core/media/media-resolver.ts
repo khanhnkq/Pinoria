@@ -284,7 +284,7 @@ export async function resolveMediaAsset(
     probeMediaCandidate(candidate, expectedType, expectedRole, options.fetcher))
   const primary = await resolveCandidate(media, 'primary', probe)
   if (!primary) {
-    throw new Error(`Không xác minh được ${media.type} nào từ Pinterest CDN`)
+    throw new Error(`Unable to verify ${media.type} from Pinterest CDN`)
   }
 
   const quality: ResolvedMediaQuality = isOriginalUrl(primary.url)
@@ -294,7 +294,7 @@ export async function resolveMediaAsset(
   if (media.type === 'video' && (media.audio === 'separate' || primary.extension === 'm3u8')) {
     const audioSource = await resolveCandidate(media, 'audio', probe)
     if (media.audio === 'separate' && !audioSource) {
-      throw new Error('Video Pinterest dùng audio tách riêng nhưng không xác minh được track audio')
+      throw new Error('Pinterest video uses separate audio but audio track could not be verified')
     }
 
     return {
@@ -325,6 +325,6 @@ export async function resolveFirstPinMedia(
   options: ResolveMediaOptions = {},
 ): Promise<ResolvedMedia> {
   const media = pin.media[0]
-  if (!media) throw new Error('Pin không có media để tải xuống')
+  if (!media) throw new Error('Pin has no media to download')
   return resolveMediaAsset(media, options)
 }

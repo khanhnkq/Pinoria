@@ -253,16 +253,16 @@ function placeHost(card: HTMLElement, host: HTMLElement): void {
 
 function stateLabel(state: ControlState, target: DownloadTarget): string {
   const destination = `Downloads/${target.folder}`
-  if (state === 'loading') return `Đang tải vào ${destination}`
-  if (state === 'success') return `Đã tải vào ${destination}`
-  if (state === 'error') return `Tải vào ${destination} thất bại`
-  return `Tải vào ${destination}`
+  if (state === 'loading') return `Downloading to ${destination}...`
+  if (state === 'success') return `Downloaded to ${destination}`
+  if (state === 'error') return `Download to ${destination} failed`
+  return `Download to ${destination}`
 }
 
 function getErrorMessage(error: unknown): string {
   return error instanceof Error && error.message
     ? error.message
-    : 'Không thể bắt đầu tải xuống. Hãy thử lại.'
+    : 'Unable to start download. Please try again.'
 }
 
 function mountControl(
@@ -282,7 +282,7 @@ function mountControl(
   const shadow = host.attachShadow({ mode: 'open' })
   shadow.innerHTML = `
     <style>${QUICK_DOWNLOAD_STYLES}</style>
-    <span class="target-list" role="group" aria-label="Chọn thư mục tải xuống"></span>
+    <span class="target-list" role="group" aria-label="Select download folder"></span>
     <span class="sr-only" aria-live="polite" aria-atomic="true"></span>
   `
   const targetList = shadow.querySelector<HTMLElement>('.target-list')
@@ -384,12 +384,50 @@ function mountControl(
     })
   }
 
+  const onCardEnter = () => { host.dataset.hovered = 'true' }
+  const onCardLeave = (event?: Event) => {
+    const related = (event as MouseEvent | undefined)?.relatedTarget as Node | null
+    if (related && (card.contains(related) || host.contains(related))) return
+    delete host.dataset.hovered
+  }
+
+  card.addEventListener('pointerenter', onCardEnter)
+  card.addEventListener('pointerleave', onCardLeave)
+  card.addEventListener('mouseenter', onCardEnter)
+  card.addEventListener('mouseleave', onCardLeave)
+  host.addEventListener('pointerenter', onCardEnter)
+  host.addEventListener('pointerleave', onCardLeave)
+  host.addEventListener('mouseenter', onCardEnter)
+  host.addEventListener('mouseleave', onCardLeave)
+
+  const parent = host.parentElement
+  if (parent && parent !== card) {
+    parent.addEventListener('pointerenter', onCardEnter)
+    parent.addEventListener('pointerleave', onCardLeave)
+    parent.addEventListener('mouseenter', onCardEnter)
+    parent.addEventListener('mouseleave', onCardLeave)
+  }
+
   return {
     actions,
     card,
     host,
     activate,
     destroy: () => {
+      card.removeEventListener('pointerenter', onCardEnter)
+      card.removeEventListener('pointerleave', onCardLeave)
+      card.removeEventListener('mouseenter', onCardEnter)
+      card.removeEventListener('mouseleave', onCardLeave)
+      host.removeEventListener('pointerenter', onCardEnter)
+      host.removeEventListener('pointerleave', onCardLeave)
+      host.removeEventListener('mouseenter', onCardEnter)
+      host.removeEventListener('mouseleave', onCardLeave)
+      if (parent && parent !== card) {
+        parent.removeEventListener('pointerenter', onCardEnter)
+        parent.removeEventListener('pointerleave', onCardLeave)
+        parent.removeEventListener('mouseenter', onCardEnter)
+        parent.removeEventListener('mouseleave', onCardLeave)
+      }
       for (const timer of resetTimers.values()) view?.clearTimeout(timer)
       resetTimers.clear()
       for (const action of actions) hoverTooltip.hide(action.button)
@@ -416,6 +454,7 @@ export function createQuickDownloadController({
   let observer: MutationObserver | undefined
   let errorToast: ErrorToast | undefined
   let hoverTooltip: HoverTooltip | undefined
+  const retryTimers: number[] = []
   let started = false
 
   const showError = (message: string) => {
@@ -432,10 +471,30 @@ export function createQuickDownloadController({
 
   const scan = () => {
     const pageUrl = view?.location.href || 'https://www.pinterest.com/'
+
+    for (const control of Array.from(controls)) {
+      if (!control.host.isConnected || !control.card.isConnected) {
+        forgetControl(control)
+      }
+    }
+
     for (const card of getPinCards(document)) {
+      const mediaSurface = Array.from(card.querySelectorAll<HTMLElement>('a[href*="/pin/"]'))
+        .find((link) => link.querySelector('img, picture, video, canvas'))
+      const placementSurface = mediaSurface ?? card
+      const currentPinLink = card.querySelector<HTMLAnchorElement>('a[href*="/pin/"]')
+      const currentPinId = currentPinLink?.getAttribute('href')?.match(/\/pin\/(\d+)/)?.[1]
+
       const existing = mountedCards.get(card)
-      if (existing?.host.isConnected) continue
-      if (existing) forgetControl(existing)
+      if (existing) {
+        if (!existing.host.isConnected || existing.host.parentElement !== placementSurface) {
+          forgetControl(existing)
+        } else if (currentPinId && existing.host.getAttribute('data-pinoria-quick-download-host') !== currentPinId) {
+          forgetControl(existing)
+        } else {
+          continue
+        }
+      }
 
       const pin = extractPinterestPage(card, pageUrl).pins[0]
       if (!pin) continue
@@ -475,6 +534,20 @@ export function createQuickDownloadController({
     mutationTimer = view?.setTimeout(scan, mutationDebounceMs)
   }
 
+  const onScroll = () => { scheduleScan() }
+  const onPointerOver = (event: Event) => {
+    const target = event.target as Element | null
+    if (!target) return
+    const containerSelector = selectorList(PINTEREST_SELECTORS.pinContainers)
+    const card = target.closest<HTMLElement>(containerSelector)
+    if (card) {
+      const existing = mountedCards.get(card)
+      if (!existing || !existing.host.isConnected) {
+        scheduleScan()
+      }
+    }
+  }
+
   return {
     setDownloadTargets: (targets) => {
       const normalizedTargets = normalizeDownloadTargets(targets)
@@ -489,20 +562,62 @@ export function createQuickDownloadController({
       started = true
       for (const eventName of guardedEventNames) view?.addEventListener(eventName, guardQuickDownloadEvent, true)
       scan()
+
+      const retryDelays = [150, 400, 800, 1500, 2500, 4000]
+      for (const delay of retryDelays) {
+        const timer = view?.setTimeout(scan, delay)
+        if (timer !== undefined) retryTimers.push(timer)
+      }
+
+      view?.addEventListener('scroll', onScroll, { capture: true, passive: true })
+      document.addEventListener('scroll', onScroll, { capture: true, passive: true })
+      document.addEventListener('pointerover', onPointerOver, { capture: true, passive: true })
+      view?.addEventListener('popstate', scheduleScan)
+
       const MutationObserverConstructor = view?.MutationObserver
-      if (!MutationObserverConstructor || !document.body) return
+      const rootNode = document.body ?? document.documentElement
+      if (!MutationObserverConstructor || !rootNode) return
       observer = new MutationObserverConstructor((records) => {
-        const hasExternalMutation = records.some((record) => Array.from(record.addedNodes).some(
-          (node) => node.nodeType !== 1 || !(node as Element).matches('[data-pinoria-quick-download-host]'),
-        ))
+        const hasExternalMutation = records.some((record) => {
+          if (record.type === 'attributes') {
+            const target = record.target as Element
+            return (
+              !target.hasAttribute?.('data-pinoria-quick-download-host') &&
+              !target.hasAttribute?.('data-pinoria-tooltip-host') &&
+              !target.hasAttribute?.('data-pinoria-control-mounted') &&
+              record.attributeName !== 'data-hovered'
+            )
+          }
+          const added = Array.from(record.addedNodes)
+          const removed = Array.from(record.removedNodes)
+          return (
+            added.some(
+              (node) => node.nodeType !== 1 || !(node as Element).matches?.('[data-pinoria-quick-download-host]'),
+            ) ||
+            removed.some(
+              (node) => node.nodeType !== 1 || !(node as Element).matches?.('[data-pinoria-quick-download-host]'),
+            )
+          )
+        })
         if (hasExternalMutation) scheduleScan()
       })
-      observer.observe(document.body, { childList: true, subtree: true })
+      observer.observe(rootNode, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['src', 'srcset', 'href', 'style', 'class'],
+      })
     },
     stop: () => {
       started = false
       observer?.disconnect()
       observer = undefined
+      view?.removeEventListener('scroll', onScroll, true)
+      document.removeEventListener('scroll', onScroll, true)
+      document.removeEventListener('pointerover', onPointerOver, true)
+      view?.removeEventListener('popstate', scheduleScan)
+      for (const timer of retryTimers) view?.clearTimeout(timer)
+      retryTimers.length = 0
       for (const eventName of guardedEventNames) view?.removeEventListener(eventName, guardQuickDownloadEvent, true)
       if (mutationTimer !== undefined) view?.clearTimeout(mutationTimer)
       mutationTimer = undefined

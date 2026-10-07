@@ -32,7 +32,7 @@ describe('createBoardDownloadController', () => {
 
     boardController.start()
     const boardHost = board.document.querySelector<HTMLElement>('[data-pinoria-board-download-host]')
-    expect(boardHost?.shadowRoot?.querySelector('button')?.textContent).toContain('Tải board')
+    expect(boardHost?.shadowRoot?.querySelector('button')?.textContent).toContain('Download board')
     boardController.stop()
 
     const home = createWindow('https://www.pinterest.com/')
@@ -107,14 +107,14 @@ describe('createBoardDownloadController', () => {
 
     button?.click()
     reportProgress?.({ stage: 'scanning', scanned: 5, completed: 0, failed: 0, total: 5 })
-    expect(button?.textContent).toContain('Đang quét 5')
+    expect(button?.textContent).toContain('Scanning 5...')
     reportProgress?.({ stage: 'downloading', scanned: 5, completed: 3, failed: 0, total: 5 })
-    expect(button?.textContent).toContain('Đang tải 3/5')
+    expect(button?.textContent).toContain('Downloading 3/5')
     finish?.({ downloaded: 5, failed: 0, total: 5 })
     await Promise.resolve()
 
     expect(onDownloadBoard).toHaveBeenCalledTimes(1)
-    expect(button?.textContent).toContain('Đã tải 5')
+    expect(button?.textContent).toContain('Downloaded 5')
     controller.stop()
   })
 

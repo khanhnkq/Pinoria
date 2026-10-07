@@ -82,7 +82,7 @@ export function registerQuickDownloadHandler(): void {
 
     const sourceUrl = sender.url ?? sender.tab?.url
     if (!isPinterestPage(sourceUrl)) {
-      sendResponse({ ok: false, error: 'Yêu cầu tải xuống không đến từ Pinterest' } satisfies QuickDownloadResponse)
+      sendResponse({ ok: false, error: 'Download request must originate from Pinterest' } satisfies QuickDownloadResponse)
       return false
     }
 
@@ -107,7 +107,7 @@ export function registerQuickDownloadHandler(): void {
             })
         sendResponse({ ok: true, downloadId } satisfies QuickDownloadResponse)
       } catch (error) {
-        const errorMessage = error instanceof Error ? error.message : 'Không thể tải xuống'
+        const errorMessage = error instanceof Error ? error.message : 'Unable to download'
         sendResponse({ ok: false, error: errorMessage } satisfies QuickDownloadResponse)
       }
     })()

@@ -42,6 +42,8 @@ if (!window.__pinoriaBoardDownloadController) {
   controller.start()
   window.__pinoriaBoardDownloadController = controller
   window.__pinoriaRemoveBoardDownloadMessageHandler = () => chrome.runtime.onMessage.removeListener(listener)
+} else {
+  window.__pinoriaBoardDownloadController.scan()
 }
 
 if (!window.__pinoriaQuickDownloadController) {
@@ -74,4 +76,6 @@ if (!window.__pinoriaQuickDownloadController) {
     chrome.storage.onChanged.removeListener(storageListener)
   }
   refreshTargets()
+} else {
+  window.__pinoriaQuickDownloadController.scan()
 }

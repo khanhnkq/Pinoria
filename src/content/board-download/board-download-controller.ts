@@ -127,8 +127,8 @@ function getBoardSearchAnchor(document: Document): HTMLElement | undefined {
 }
 
 function progressLabel(progress: BoardDownloadProgress): string {
-  if (progress.stage === 'scanning') return `Đang quét ${progress.scanned}`
-  return `Đang tải ${progress.completed + progress.failed}/${progress.total}`
+  if (progress.stage === 'scanning') return `Scanning ${progress.scanned}...`
+  return `Downloading ${progress.completed + progress.failed}/${progress.total}`
 }
 
 export function createBoardDownloadController({
@@ -148,7 +148,7 @@ export function createBoardDownloadController({
 
   const setButtonState = (
     state: 'idle' | 'working' | 'success' | 'error',
-    label = state === 'error' ? 'Thử lại' : 'Tải board',
+    label = state === 'error' ? 'Retry' : 'Download board',
   ) => {
     if (!button || !buttonLabel) return
     button.dataset.state = state
@@ -166,13 +166,13 @@ export function createBoardDownloadController({
     if (downloading || !isSupportedBoard(document)) return
     downloading = true
     if (resetTimer !== undefined) view?.clearTimeout(resetTimer)
-    setButtonState('working', 'Đang quét 0')
+    setButtonState('working', 'Scanning 0...')
     try {
       const result = await onDownloadBoard((progress) => {
         setButtonState('working', progressLabel(progress))
       })
-      const suffix = result.failed > 0 ? ` (${result.failed} lỗi)` : ''
-      setButtonState('success', `Đã tải ${result.downloaded}${suffix}`)
+      const suffix = result.failed > 0 ? ` (${result.failed} failed)` : ''
+      setButtonState('success', `Downloaded ${result.downloaded}${suffix}`)
       scheduleReset()
     } catch {
       setButtonState('error')
@@ -203,16 +203,16 @@ export function createBoardDownloadController({
     const shadow = host.attachShadow({ mode: 'open' })
     shadow.innerHTML = `
       <style>${BOARD_BUTTON_STYLES}</style>
-      <button type="button" aria-label="Tải toàn bộ board bằng Pinoria" aria-busy="false" data-state="idle">
+      <button type="button" aria-label="Download entire board with Pinoria" aria-busy="false" data-state="idle">
         <svg class="download" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m0 0 5-5m-5 5-5-5M5 21h14" /></svg>
         <svg class="spinner" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-8-8" /></svg>
         <svg class="check" aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6" /></svg>
-        <span aria-live="polite">Tải board</span>
+        <span aria-live="polite">Download board</span>
       </button>
     `
     button = shadow.querySelector<HTMLButtonElement>('button') ?? undefined
     buttonLabel = shadow.querySelector<HTMLElement>('button span') ?? undefined
-    if (!button || !buttonLabel) throw new Error('Không thể tạo nút tải board')
+    if (!button || !buttonLabel) throw new Error('Unable to create download board button')
     button.addEventListener('click', handleButtonClick, true)
     buttonHost = host
     searchAnchor.insertAdjacentElement('afterend', host)

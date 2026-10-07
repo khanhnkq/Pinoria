@@ -25,12 +25,12 @@ export interface DownloadBoardOptions {
 
 function scanError(progress: BoardScanProgress): Error {
   if (progress.status === 'error') {
-    return new Error(progress.error ?? 'Không thể quét board Pinterest')
+    return new Error(progress.error ?? 'Unable to scan Pinterest board')
   }
   if (progress.reason === 'page-changed') {
-    return new Error('Board đã thay đổi trong lúc quét')
+    return new Error('Board changed during scan')
   }
-  return new Error('Quá trình quét board đã dừng')
+  return new Error('Board scanning stopped')
 }
 
 export async function downloadBoard({
@@ -87,7 +87,7 @@ export async function downloadBoard({
     }
   })
 
-  if (pins.length === 0) throw new Error('Không tìm thấy Pin nào để tải')
+  if (pins.length === 0) throw new Error('No Pins found to download')
 
   let completed = 0
   let failed = 0
@@ -108,6 +108,6 @@ export async function downloadBoard({
     })
   }
 
-  if (completed === 0) throw new Error('Không thể tải Pin nào trong board')
+  if (completed === 0) throw new Error('Unable to download any Pins in board')
   return { downloaded: completed, failed, total: pins.length }
 }

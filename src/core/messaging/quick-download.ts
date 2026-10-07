@@ -35,6 +35,6 @@ export async function sendQuickDownloadRequest(pin: PinAsset, folder?: string): 
   const response = (await chrome.runtime.sendMessage(request)) as QuickDownloadResponse | undefined
 
   if (!response?.ok) {
-    throw new Error(response?.error ?? 'Không thể bắt đầu tải xuống')
+    throw new Error(response?.error ?? 'Unable to start download')
   }
 }

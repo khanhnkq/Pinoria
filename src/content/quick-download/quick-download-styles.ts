@@ -45,9 +45,13 @@ export const QUICK_DOWNLOAD_STYLES = `
     -webkit-tap-highlight-color: transparent;
   }
 
+  :host([data-hovered]) button,
+  :host(:hover) button,
+  :host(:focus-within) button,
   :host-context([data-test-id="pin"]:hover) button,
   :host-context([data-grid-item="true"]:hover) button,
-  :host-context(article:hover) button,
+  :host-context([role="listitem"]:hover) button,
+  button:hover,
   button:focus-visible,
   button[data-state="loading"],
   button[data-state="success"],

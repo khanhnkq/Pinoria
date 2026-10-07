@@ -117,7 +117,7 @@ async function createOffscreenDocument(): Promise<void> {
   creatingOffscreenDocument ??= chrome.offscreen.createDocument({
     url: OFFSCREEN_PAGE,
     reasons: [chrome.offscreen.Reason.BLOBS],
-    justification: 'Ghép track video và audio Pinterest thành một MP4 để tải xuống cục bộ.',
+    justification: 'Mux Pinterest video and audio tracks into a local MP4 file.',
   }).finally(() => {
     creatingOffscreenDocument = undefined
   })

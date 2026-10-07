@@ -202,7 +202,7 @@ describe('createQuickDownloadController', () => {
     const { document, window } = loadFixture('image-pin.html')
     const controller = createQuickDownloadController({
       document,
-      onQuickDownload: vi.fn().mockRejectedValue(new Error('Không thể tải video có audio riêng')),
+      onQuickDownload: vi.fn().mockRejectedValue(new Error('Unable to download video with separate audio')),
     })
     controller.start()
 
@@ -211,16 +211,16 @@ describe('createQuickDownloadController', () => {
     await flush(window)
 
     expect(button.dataset.state).toBe('error')
-    expect(button.getAttribute('aria-label')).toBe('Tải vào Downloads/Pinoria thất bại')
+    expect(button.getAttribute('aria-label')).toBe('Download to Downloads/Pinoria failed')
     const tooltipHost = document.querySelector<HTMLElement>('[data-pinoria-tooltip-host]')
     const tooltip = tooltipHost?.shadowRoot?.querySelector<HTMLElement>('[role="tooltip"]')
-    expect(tooltip?.textContent).toBe('Không thể tải video có audio riêng')
+    expect(tooltip?.textContent).toBe('Unable to download video with separate audio')
     const feedbackHost = document.querySelector<HTMLElement>('[data-pinoria-feedback-host]')
     const alert = feedbackHost?.shadowRoot?.querySelector<HTMLElement>('[role="alert"]')
     expect(feedbackHost?.parentElement).toBe(document.body)
     expect(feedbackHost?.style.position).toBe('fixed')
     expect(feedbackHost?.style.zIndex).toBe('2147483647')
-    expect(alert?.textContent).toContain('Không thể tải video có audio riêng')
+    expect(alert?.textContent).toContain('Unable to download video with separate audio')
     controller.stop()
     expect(document.querySelector('[data-pinoria-feedback-host]')).toBeNull()
   })
