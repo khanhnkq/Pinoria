@@ -1,3 +1,4 @@
+import { supportsOffscreenDocuments } from '../core/extension-api'
 import {
   MUX_DOWNLOAD_MESSAGE,
   MUX_RELEASE_MESSAGE,
@@ -9,6 +10,7 @@ import {
   type MuxReadyRequest,
   type MuxReadyResponse,
 } from '../core/messaging/mux-download'
+import { createMuxEngine, type MuxEngine } from './mux-engine'
 
 const OFFSCREEN_PAGE = 'src/offscreen/index.html'
 let creatingOffscreenDocument: Promise<void> | undefined
@@ -21,8 +23,28 @@ let downloadLifecycleListenerInstalled = false
 let lifecycleMessageListenerInstalled = false
 let pendingMuxRequests = 0
 let idleCloseTimer: ReturnType<typeof setTimeout> | undefined
+let localEngine: MuxEngine | undefined
+
+function hasOffscreenSupport(): boolean {
+  try {
+    return supportsOffscreenDocuments(chrome)
+  } catch {
+    return false
+  }
+}
+
+function getLocalEngine(): MuxEngine {
+  // Firefox MV3 background is an event page with full DOM/OPFS access,
+  // so mux directly here instead of using chrome.offscreen (Chrome-only).
+  localEngine ??= createMuxEngine()
+  return localEngine
+}
 
 async function releaseObjectUrl(objectUrl: string): Promise<void> {
+  if (!hasOffscreenSupport()) {
+    await getLocalEngine().releaseObjectUrl(objectUrl).catch(() => undefined)
+    return
+  }
   await chrome.runtime.sendMessage<MuxReleaseRequest>({
     type: MUX_RELEASE_MESSAGE,
     objectUrl,
@@ -36,6 +58,7 @@ function cancelScheduledOffscreenClose(): void {
 }
 
 function scheduleOffscreenClose(): void {
+  if (!hasOffscreenSupport()) return
   cancelScheduledOffscreenClose()
   if (pendingMuxRequests > 0 || activeMuxDownloads.size > 0) return
 
@@ -97,7 +120,7 @@ async function waitForOffscreenReady(): Promise<void> {
 }
 
 async function hasOffscreenDocument(): Promise<boolean> {
-  if (typeof chrome.offscreen.hasDocument === 'function') {
+  if (typeof chrome.offscreen?.hasDocument === 'function') {
     return chrome.offscreen.hasDocument()
   }
 
@@ -139,6 +162,7 @@ async function recreateOffscreenDocument(): Promise<void> {
 }
 
 async function ensureOffscreenDocument(): Promise<void> {
+  if (!hasOffscreenSupport()) return
   if (!(await hasOffscreenDocument())) {
     await createOffscreenDocument()
   }
@@ -153,6 +177,57 @@ async function ensureOffscreenDocument(): Promise<void> {
   }
 }
 
+async function requestMuxedDownloadViaOffscreen(
+  request: Omit<MuxDownloadRequest, 'type'>,
+): Promise<number> {
+  const response = await chrome.runtime.sendMessage<MuxDownloadRequest, MuxDownloadResponse>({
+    type: MUX_DOWNLOAD_MESSAGE,
+    ...request,
+  })
+  if (!response?.ok) {
+    throw new Error(response?.error ?? 'Không thể ghép video và audio Pinterest')
+  }
+
+  ensureDownloadLifecycleListener()
+  try {
+    const downloadId = await chrome.downloads.download({
+      url: response.objectUrl,
+      filename: request.filename,
+      conflictAction: 'uniquify',
+      saveAs: false,
+    })
+    activeMuxDownloads.set(downloadId, response.objectUrl)
+    return downloadId
+  } catch (error) {
+    await releaseObjectUrl(response.objectUrl)
+    throw error
+  }
+}
+
+async function requestMuxedDownloadLocal(
+  request: Omit<MuxDownloadRequest, 'type'>,
+): Promise<number> {
+  const objectUrl = await getLocalEngine().enqueueMux({
+    type: MUX_DOWNLOAD_MESSAGE,
+    ...request,
+  })
+
+  ensureDownloadLifecycleListener()
+  try {
+    const downloadId = await chrome.downloads.download({
+      url: objectUrl,
+      filename: request.filename,
+      conflictAction: 'uniquify',
+      saveAs: false,
+    })
+    activeMuxDownloads.set(downloadId, objectUrl)
+    return downloadId
+  } catch (error) {
+    await releaseObjectUrl(objectUrl)
+    throw error
+  }
+}
+
 export async function requestMuxedDownload(
   request: Omit<MuxDownloadRequest, 'type'>,
 ): Promise<number> {
@@ -160,30 +235,11 @@ export async function requestMuxedDownload(
   cancelScheduledOffscreenClose()
 
   try {
+    if (!hasOffscreenSupport()) {
+      return await requestMuxedDownloadLocal(request)
+    }
     await ensureOffscreenDocument()
-
-    const response = await chrome.runtime.sendMessage<MuxDownloadRequest, MuxDownloadResponse>({
-      type: MUX_DOWNLOAD_MESSAGE,
-      ...request,
-    })
-    if (!response?.ok) {
-      throw new Error(response?.error ?? 'Không thể ghép video và audio Pinterest')
-    }
-
-    ensureDownloadLifecycleListener()
-    try {
-      const downloadId = await chrome.downloads.download({
-        url: response.objectUrl,
-        filename: request.filename,
-        conflictAction: 'uniquify',
-        saveAs: false,
-      })
-      activeMuxDownloads.set(downloadId, response.objectUrl)
-      return downloadId
-    } catch (error) {
-      await releaseObjectUrl(response.objectUrl)
-      throw error
-    }
+    return await requestMuxedDownloadViaOffscreen(request)
   } finally {
     pendingMuxRequests -= 1
     scheduleOffscreenClose()

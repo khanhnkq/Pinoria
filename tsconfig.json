@@ -21,6 +21,7 @@
     "src",
     "manifest.config.ts",
     "vite.config.ts",
+    "vite.firefox.config.ts",
     "vitest.config.ts",
     "eslint.config.js"
   ]
