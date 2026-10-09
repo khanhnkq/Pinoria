@@ -1,6 +1,6 @@
 {
   "name": "pinoria",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "type": "module",
   "description": "A private, local-first Pinterest media downloader for Chromium and Firefox browsers.",
@@ -10,7 +10,7 @@
     "build": "vite build",
     "build:firefox": "PINORIA_TARGET=firefox vite build -c vite.firefox.config.ts",
     "build:pages": "vite build -c vite.pages.config.ts",
-    "package:firefox": "npm run build:firefox && python3 -c \"import zipfile,os; src='dist-firefox'; out='releases/pinoria-firefox-v0.3.0.zip'; (os.remove(out) if os.path.exists(out) else None); z=zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED); [z.write(os.path.join(r,f), os.path.relpath(os.path.join(r,f),src)) for r,_,fs in os.walk(src) for f in fs]; z.close(); print(out)\"",
+    "package:firefox": "npm run build:firefox && python3 -c \"import zipfile,os; src='dist-firefox'; out='releases/pinoria-firefox-v0.3.1.zip'; (os.remove(out) if os.path.exists(out) else None); z=zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED); [z.write(os.path.join(r,f), os.path.relpath(os.path.join(r,f),src)) for r,_,fs in os.walk(src) for f in fs]; z.close(); print(out)\"",
     "video:studio": "remotion studio src/remotion/index.ts --no-open",
     "video:render": "remotion render src/remotion/index.ts PinoriaDemo out/pinoria-demo.mp4",
     "video:still": "remotion still src/remotion/index.ts PinoriaDemo out/pinoria-demo-cover.png --frame=90",

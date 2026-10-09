@@ -8,7 +8,7 @@ export default defineManifest({
   name: 'Pinoria',
   short_name: 'Pinoria',
   description: 'Download Pinterest media locally with native-feeling controls.',
-  version: '0.3.0',
+  version: '0.3.1',
   icons: {
     16: 'icons/icon-16.png',
     32: 'icons/icon-32.png',
@@ -46,8 +46,8 @@ export default defineManifest({
     },
   ],
   permissions: isFirefox
-    ? ['activeTab', 'downloads', 'storage']
-    : ['activeTab', 'downloads', 'offscreen', 'storage'],
+    ? ['downloads', 'storage']
+    : ['downloads', 'offscreen', 'storage'],
   host_permissions: [
     'https://*.pinterest.com/*',
     'https://pinterest.com/*',

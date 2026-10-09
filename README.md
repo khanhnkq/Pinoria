@@ -106,5 +106,4 @@ Dự án được xây dựng trên nền tảng **TypeScript**, sử dụng **V
 Extension chỉ sử dụng các quyền tối thiểu để hoạt động cục bộ:
 - `downloads`: Để lưu trữ file trực tiếp vào máy tính của bạn.
 - `storage`: Để lưu các cấu hình thư mục lưu trữ và mã màu của bạn.
-- `activeTab`: Để tương tác trực tiếp và quét cấu trúc trang Pinterest đang mở.
 - Quyền truy cập các Host: `https://*.pinterest.com/*` và `https://*.pinimg.com/*` để quét ảnh/video và tải file từ CDN Pinterest.

@@ -16,7 +16,6 @@ Pinoria requests only the minimal permissions required to function:
 - **`downloads`**: Used exclusively to save requested images, GIFs, and videos to your local computer's Downloads directory.
 - **`offscreen`**: Used to process and mux video/audio streams into MP4 files locally using browser Web APIs without leaving your computer.
 - **`storage`**: Used exclusively to save your local UI preferences (such as custom destination folder names and category colors) on your device.
-- **`activeTab`**: Used to interact with the active Pinterest tab when you trigger download controls.
 - **Host Permissions (`*.pinterest.com`, `*.pinimg.com`)**: Required to identify Pins and download media files directly from Pinterest's official media CDN.
 
 ## 4. User Control & Data Retention

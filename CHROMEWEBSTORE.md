@@ -1,7 +1,7 @@
 # Chrome Web Store Listing — Pinoria
 
-> Last Updated: 2026-10-07  
-> Version: 0.3.0  
+> Last Updated: 2026-10-09  
+> Version: 0.3.1  
 > Target Platforms: Chrome Web Store (Manifest V3)
 
 ---
@@ -43,7 +43,6 @@ PERMISSIONS EXPLAINED
 • "downloads": Saves media files directly into your computer's Downloads directory.
 • "offscreen": Processes and muxes video/audio streams into clean MP4 files locally using browser Web APIs.
 • "storage": Saves your custom folder paths and color-coded shortcuts locally.
-• "activeTab": Interacts with the active Pinterest tab when clicking the extension icon.
 • Host permissions (*.pinterest.com, *.pinimg.com): Allows the extension to extract media elements and download assets directly from Pinterest CDN.
 
 PRIVACY & SECURITY
@@ -56,7 +55,7 @@ SUPPORT & ISSUES
 Found a bug or have a suggestion?
 GitHub: https://github.com/khanhnkq/Pinoria
 
-Version 0.3.0 — Native hover quick-download, multi-folder color tagging, automatic format sorting, and full board scanner.
+Version 0.3.1 — Native hover quick-download, multi-folder color tagging, automatic format sorting, and full board scanner.
 ```
 
 ### Category [REQUIRED]
@@ -76,7 +75,8 @@ Version 0.3.0 — Native hover quick-download, multi-folder color tagging, autom
 | **Store Icon** [REQUIRED]      | 128×128 px                 | PNG      | ✅ Ready    | `/Users/nguyenkimquockhanh/Desktop/Pinoria_Icon_128x128.png`    |
 | **Screenshot 1** [REQUIRED]    | 1280×800 px                | PNG      | ✅ Ready    | `/Users/nguyenkimquockhanh/Desktop/Pinoria_Screenshot_1_1280x800.png` |
 | **Screenshot 2** [RECOMMENDED] | 1280×800 px                | PNG      | ✅ Ready    | `/Users/nguyenkimquockhanh/Desktop/Pinoria_Screenshot_2_1280x800.png` |
-| **Small Promo Tile**           | 440×280 px                 | PNG/JPEG | ⬜ Tùy chọn | Banner quảng bá hiển thị trên trang chủ store                   |
+| **Small Promo Tile**           | 440×280 px                 | PNG 24b  | ✅ Ready    | `/Users/nguyenkimquockhanh/Desktop/Pinoria_Promo_Small_440x280.png` |
+| **Marquee Promo Tile**         | 1400×560 px                | PNG 24b  | ✅ Ready    | `/Users/nguyenkimquockhanh/Desktop/Pinoria_Marquee_1400x560.png` |
 
 ---
 
@@ -89,7 +89,6 @@ _Điền vào form "Permissions justification" trên Developer Dashboard:_
 | `downloads`                 | permissions      | Required to save downloaded images, animated GIFs, and muxed MP4 videos directly to the user's local Downloads folder.                                            |
 | `offscreen`                 | permissions      | Used to run audio/video stream muxing and blob processing locally in an offscreen document using native browser Web APIs that are unavailable in service workers. |
 | `storage`                   | permissions      | Used exclusively to persist user download configurations, such as custom folder destination paths and color-coded tags, locally on the device.                    |
-| `activeTab`                 | permissions      | Grants temporary access to the active Pinterest tab when the user clicks the extension action or quick download controls.                                         |
 | `https://*.pinterest.com/*` | host_permissions | Allows content scripts to display hover download buttons and board scanner controls directly on Pinterest pages.                                                  |
 | `https://*.pinimg.com/*`    | host_permissions | Required to fetch and verify original full-resolution media streams and images from Pinterest's official media CDN.                                               |
 

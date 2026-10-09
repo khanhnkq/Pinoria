@@ -19,7 +19,7 @@ Xây Chrome Extension Manifest V3 dùng cá nhân, miễn phí và chạy cục 
 - `background/`: xác thực message/URL, tải ảnh/video bằng `chrome.downloads` và điều phối bộ xử lý media nền.
 - `content/board-download/`: quét board/section rồi tải tuần tự ngay trong trang Pinterest; tiến độ hiển thị trên nút native cạnh tiêu đề board.
 - `core/`: mô hình `PinAsset`, resolver ảnh/video/GIF/carousel, đặt tên, chống trùng, retry và exporter.
-- Chỉ xin `downloads`, `storage`, `activeTab` và host `https://*.pinterest.com/*`, `https://*.pinimg.com/*`.
+- Chỉ xin `downloads`, `storage`, `offscreen` và host `https://*.pinterest.com/*`, `https://*.pinimg.com/*`.
 
 ## Giao diện native Pinterest
 
