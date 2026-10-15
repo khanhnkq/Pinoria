@@ -69,29 +69,40 @@ a {
 }
 
 .header-inner {
-  width: min(1180px, calc(100% - 40px));
+  width: min(1200px, calc(100% - 32px));
   margin: 0 auto;
-  height: 72px;
+  height: 68px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 16px;
+  flex-wrap: nowrap;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  font-family: 'Outfit', -apple-system, sans-serif;
+  gap: 10px;
+  font-family: var(--font-display);
   font-weight: 800;
-  font-size: 22px;
+  font-size: 20px;
   letter-spacing: -0.02em;
   color: #0f172a;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .brand-logo {
-  border-radius: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   border: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+.brand-name {
+  font-weight: 800;
+  color: #0f172a;
 }
 
 .brand-version {
@@ -100,22 +111,27 @@ a {
   font-weight: 700;
   background: #f1f5f9;
   color: #475569;
-  padding: 3px 10px;
+  padding: 2px 8px;
   border-radius: 9999px;
   border: 1px solid #cbd5e1;
+  flex-shrink: 0;
 }
 
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 18px;
+  flex-shrink: 1;
+  white-space: nowrap;
 }
 
 .nav-link {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 650;
   color: #475569;
   transition: color 0.15s ease;
+  white-space: nowrap;
+  padding: 4px 2px;
 }
 
 .nav-link:hover {
@@ -125,19 +141,31 @@ a {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.header-cta {
+  padding: 8px 16px;
+  font-size: 13.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+  gap: 6px;
 }
 
 .icon-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
   border-radius: 9999px;
   border: 2px solid #cbd5e1;
   background: #ffffff;
   color: #1e293b;
+  flex-shrink: 0;
   transition: all 0.15s ease;
 }
 
@@ -150,25 +178,27 @@ a {
 .lang-switcher {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 4px 10px;
+  gap: 3px;
+  padding: 3px 8px;
   background: #ffffff;
   border: 2px solid #cbd5e1;
   border-radius: 9999px;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 700;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .lang-switcher .lang-icon {
-  font-size: 15px;
+  font-size: 14px;
   color: #64748b;
-  margin-right: 2px;
+  margin-right: 1px;
 }
 
 .lang-btn {
   color: #64748b;
   text-decoration: none;
-  padding: 3px 8px;
+  padding: 2px 6px;
   border-radius: 9999px;
   transition: all 0.15s ease;
   line-height: 1.2;
@@ -186,7 +216,7 @@ a {
 
 .lang-sep {
   color: #cbd5e1;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 /* ==========================================================================
@@ -276,7 +306,7 @@ a {
 
 .hero-title {
   max-width: 900px;
-  font-family: 'Outfit', -apple-system, sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(36px, 5.2vw, 64px);
   line-height: 1.1;
   font-weight: 850;
@@ -433,7 +463,7 @@ a {
 }
 
 .section-heading {
-  font-family: 'Outfit', -apple-system, sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(26px, 3.4vw, 38px);
   line-height: 1.2;
   font-weight: 800;
@@ -648,7 +678,7 @@ a {
 }
 
 .step-title {
-  font-family: 'Outfit', -apple-system, sans-serif;
+  font-family: var(--font-display);
   font-size: 20px;
   font-weight: 800;
   color: #0f172a;
@@ -748,7 +778,7 @@ a {
 }
 
 .final-cta-title {
-  font-family: 'Outfit', -apple-system, sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(28px, 3.8vw, 44px);
   font-weight: 850;
   letter-spacing: -0.025em;
@@ -850,7 +880,17 @@ a {
 /* ==========================================================================
    Responsive Breakpoints
    ========================================================================== */
-@media (max-width: 960px) {
+@media (max-width: 1120px) {
+  .brand-version {
+    display: none;
+  }
+
+  .nav-menu {
+    gap: 14px;
+  }
+}
+
+@media (max-width: 1024px) {
   .nav-menu {
     display: none;
   }
@@ -877,7 +917,41 @@ a {
 
 @media (max-width: 640px) {
   .header-inner {
-    height: 60px;
+    height: 58px;
+    gap: 8px;
+  }
+
+  .brand-name {
+    font-size: 18px;
+  }
+
+  .brand-logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .header-actions {
+    gap: 6px;
+  }
+
+  .header-cta {
+    padding: 7px 12px;
+    font-size: 13px;
+    gap: 5px;
+  }
+
+  .lang-switcher {
+    padding: 2px 6px;
+    font-size: 12px;
+  }
+
+  .lang-switcher .lang-icon {
+    display: none;
+  }
+
+  .icon-button {
+    width: 34px;
+    height: 34px;
   }
 
   .hero-section {
@@ -912,5 +986,16 @@ a {
   .footer-links-group {
     flex-direction: column;
     gap: 24px;
+  }
+}
+
+@media (max-width: 440px) {
+  .icon-button {
+    display: none;
+  }
+
+  .header-cta {
+    padding: 6px 10px;
+    font-size: 12px;
   }
 }
