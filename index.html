@@ -20,7 +20,37 @@
     />
     <meta name="author" content="Pinoria" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://khanhnkq.github.io/Pinoria/" />
+    <link rel="canonical" href="https://khanhnkq.github.io/Pinoria/en/" />
+
+    <!-- Multilingual SEO Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://khanhnkq.github.io/Pinoria/en/" />
+    <link rel="alternate" hreflang="vi" href="https://khanhnkq.github.io/Pinoria/vi/" />
+    <link rel="alternate" hreflang="x-default" href="https://khanhnkq.github.io/Pinoria/en/" />
+
+    <!-- Language Auto-Detection & Redirection -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('pinoria_lang');
+          if (saved === 'vi') {
+            window.location.replace('./vi/');
+            return;
+          } else if (saved === 'en') {
+            window.location.replace('./en/');
+            return;
+          }
+          var nav = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+          if (nav.toLowerCase().indexOf('vi') === 0) {
+            window.location.replace('./vi/');
+            return;
+          }
+        } catch (e) {}
+        window.location.replace('./en/');
+      })();
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="0;url=./en/">
+    </noscript>
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -159,6 +189,13 @@
         </nav>
 
         <div class="header-actions">
+          <div class="lang-switcher" aria-label="Language Selector">
+            <i class="ti ti-world lang-icon" aria-hidden="true"></i>
+            <a class="lang-btn" href="./en/" onclick="localStorage.setItem('pinoria_lang','en')">EN</a>
+            <span class="lang-sep">/</span>
+            <a class="lang-btn" href="./vi/" onclick="localStorage.setItem('pinoria_lang','vi')">VI</a>
+          </div>
+
           <a
             class="cta-button header-cta"
             href="https://github.com/khanhnkq/Pinoria/releases"
@@ -227,14 +264,26 @@
             <span class="dot green"></span>
             <span class="browser-address">https://pinterest.com/feed</span>
           </div>
-          <img
-            class="hero-media-image"
-            src="./landing/hero-mockup.jpg"
-            alt="Pinoria 1-Click Quick Download Hero Mockup"
-            width="1280"
-            height="720"
-            loading="eager"
-          />
+          <video
+            class="hero-media-video"
+            src="./videos/pinoria-demo-cinematic-hq.mp4"
+            poster="./landing/hero-mockup.jpg"
+            autoplay
+            muted
+            loop
+            playsinline
+            controls
+            preload="metadata"
+          >
+            <img
+              class="hero-media-image"
+              src="./landing/hero-mockup.jpg"
+              alt="Pinoria 1-Click Quick Download Hero Mockup"
+              width="1280"
+              height="720"
+              loading="eager"
+            />
+          </video>
         </div>
 
         <!-- Trust Highlights Strip -->

@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pinoria — Tiện Ích Tải Video Pinterest Có Tiếng & Tải Ảnh 4K | Chrome Extension</title>
+    
+    <!-- Primary SEO Meta Tags -->
+    <meta
+      name="title"
+      content="Pinoria — Tiện Ích Tải Video Pinterest Có Tiếng & Tải Ảnh 4K | Chrome Extension"
+    />
+    <meta
+      name="description"
+      content="Tải video Pinterest có âm thanh chuẩn 1080p, tải ảnh gốc 4K HD và toàn bộ bảng (board) chỉ trong 1-click. Hoàn toàn miễn phí, bảo mật local-first, không quảng cáo rác."
+    />
+    <meta
+      name="keywords"
+      content="tải video pinterest có âm thanh, tải video pinterest có tiếng, tải ảnh pinterest gốc 4k, tải bảng pinterest hàng loạt, chrome extension pinterest, pinoria"
+    />
+    <meta name="author" content="Pinoria" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://khanhnkq.github.io/Pinoria/vi/" />
+
+    <!-- Multilingual SEO Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://khanhnkq.github.io/Pinoria/en/" />
+    <link rel="alternate" hreflang="vi" href="https://khanhnkq.github.io/Pinoria/vi/" />
+    <link rel="alternate" hreflang="x-default" href="https://khanhnkq.github.io/Pinoria/en/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://khanhnkq.github.io/Pinoria/vi/" />
+    <meta property="og:locale" content="vi_VN" />
+    <meta
+      property="og:title"
+      content="Pinoria — Tiện Ích Tải Video Pinterest Có Tiếng & Tải Ảnh 4K"
+    />
+    <meta
+      property="og:description"
+      content="Lưu video Pinterest có âm thanh, ảnh chất lượng gốc và trọn bộ bảng chỉ trong 1-click. Miễn phí & 100% riêng tư."
+    />
+    <meta property="og:image" content="/Pinoria/assets/hero-mockup-BmQQuSNI.jpg" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://khanhnkq.github.io/Pinoria/vi/" />
+    <meta
+      name="twitter:title"
+      content="Pinoria — Tiện Ích Tải Video Pinterest Có Tiếng & Tải Ảnh 4K"
+    />
+    <meta
+      name="twitter:description"
+      content="Lưu video Pinterest có âm thanh, ảnh chất lượng gốc và trọn bộ bảng chỉ trong 1-click. Miễn phí & 100% riêng tư."
+    />
+    <meta name="twitter:image" content="/Pinoria/assets/hero-mockup-BmQQuSNI.jpg" />
+
+    <!-- Favicon & App Icons -->
+    <link rel="icon" type="image/x-icon" href="/Pinoria/assets/favicon-DkTu-vH4.ico" />
+    <link rel="shortcut icon" href="/Pinoria/assets/favicon-DkTu-vH4.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/Pinoria/assets/icon-32-B6PVtV4R.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/Pinoria/assets/icon-16-Bre88DRi.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/Pinoria/assets/icon-48-ekrWnivz.png" />
+    <link rel="apple-touch-icon" sizes="128x128" href="/Pinoria/assets/icon-128-PvLyLTH8.png" />
+
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tabler Icons Library (Official Webfont) -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"
+    />
+
+    <!-- Styles -->
+
+    <!-- JSON-LD Structured Data: SoftwareApplication & FAQPage -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "SoftwareApplication",
+            "name": "Pinoria - Tiện ích Tải Video & Ảnh Pinterest Tốt Nhất",
+            "operatingSystem": "Chromium, Google Chrome, Brave, Edge",
+            "applicationCategory": "BrowserApplication",
+            "inLanguage": "vi",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "ratingCount": "128"
+            },
+            "description": "Tải video Pinterest có âm thanh tiếng, ảnh gốc HD 4K và tải hàng loạt toàn bộ bảng chỉ với 1-click. Tiện ích Chrome miễn phí, sạch và bảo mật."
+          },
+          {
+            "@type": "FAQPage",
+            "inLanguage": "vi",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Pinoria có tải được video Pinterest có âm thanh (tiếng) không?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Có, chắc chắn 100%! Pinoria tích hợp bộ xử lý muxing âm thanh và hình ảnh client-side bằng Web API. Tiện ích tự động bắt luồng âm thanh và video riêng biệt từ CDN của Pinterest rồi ghép thành file MP4 chuẩn chất lượng cao có đầy đủ tiếng."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Làm thế nào để tải toàn bộ bảng (board) Pinterest cùng một lúc?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Bạn chỉ cần mở trang bảng hoặc phân mục (section) bất kỳ trên Pinterest. Pinoria hiển thị nút màu đỏ 'Tải Toàn Bộ Bảng' ngay cạnh ô tìm kiếm bảng. Nhấn vào đó, tiện ích sẽ tự động cuộn qua các pin, lọc trùng lặp và tải tuần tự về thư mục máy tính của bạn."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Pinoria có tải được ảnh Pinterest với độ phân giải gốc cao nhất không?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Có. Pinoria tự động phân tích đường dẫn ảnh và lấy link gốc từ thư mục originals của hệ thống máy chủ Pinterest CDN, đảm bảo bạn nhận được ảnh HD/4K sắc nét nhất thay vì ảnh thu nhỏ bị nén."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Pinoria có miễn phí và an toàn không? Có theo dõi dữ liệu không?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Pinoria hoàn toàn miễn phí 100% và mã nguồn mở trên GitHub. Tiện ích hoạt động theo mô hình Local-First: không máy chủ trung gian, không thu thập nhật ký, không quảng cáo và không gửi bất kỳ dữ liệu nào của bạn ra ngoài."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Pinoria có hỗ trợ tải bảng bí mật (secret board) không?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Có! Vì Pinoria chạy trực tiếp trong phiên duyệt web đang đăng nhập của bạn, tiện ích có thể tải bất kỳ bảng bí mật nào mà tài khoản của bạn được cấp quyền truy cập."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" crossorigin href="/Pinoria/assets/styles-Bi0sZJXB.css">
+  </head>
+  <body>
+    <!-- Header / Navigation -->
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="./" aria-label="Trang chủ Pinoria">
+          <img class="brand-logo" src="/Pinoria/assets/icon-128-PvLyLTH8.png" width="40" height="40" alt="Pinoria Logo" />
+          <span class="brand-name">Pinoria</span>
+          <span class="brand-version">v0.3.3</span>
+        </a>
+
+        <nav class="nav-menu" aria-label="Menu Điều Hướng">
+          <a class="nav-link" href="#features">Tính Năng</a>
+          <a class="nav-link" href="#video-audio">Tải Video Có Tiếng</a>
+          <a class="nav-link" href="#board-batch">Tải Trọn Bộ Bảng</a>
+          <a class="nav-link" href="#comparison">So Sánh</a>
+          <a class="nav-link" href="#faq">FAQ</a>
+        </nav>
+
+        <div class="header-actions">
+          <!-- Language Selector -->
+          <div class="lang-switcher" aria-label="Bộ chọn ngôn ngữ">
+            <i class="ti ti-world lang-icon" aria-hidden="true"></i>
+            <a class="lang-btn" href="../en/" onclick="localStorage.setItem('pinoria_lang','en')">EN</a>
+            <span class="lang-sep">/</span>
+            <span class="lang-btn active">VI</span>
+          </div>
+
+          <a
+            class="cta-button header-cta"
+            href="https://github.com/khanhnkq/Pinoria/releases"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="ti ti-brand-chrome"></i>
+            <span>Thêm vào Chrome — Miễn Phí</span>
+          </a>
+          <a
+            class="icon-button"
+            href="https://github.com/khanhnkq/Pinoria"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Xem mã nguồn Pinoria trên GitHub"
+          >
+            <i class="ti ti-brand-github"></i>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-container">
+      <!-- Section 1: Hero Section -->
+      <section class="hero-section">
+        <div class="badge-pill">
+          <i class="ti ti-sparkles" style="color: var(--color-crimson-500); font-size: 15px;"></i>
+          <span>100% Miễn Phí • Không Quảng Cáo • Xử Lý Offline • Chuẩn Manifest V3</span>
+        </div>
+
+        <h1 class="hero-title">
+          Tiện Ích Tải Video & Ảnh Tinh Gọn Cho <span class="gradient-text">Pinterest</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Tải ảnh gốc 4K HD, video MP4 chuẩn âm thanh sắc nét và lưu trọn bộ bảng chỉ trong 1-click. 
+          Tích hợp mượt mà trực tiếp vào giao diện Pinterest, không quảng cáo chuyển hướng rác.
+        </p>
+
+        <div class="hero-cta-group">
+          <a
+            class="cta-button primary-cta"
+            href="https://github.com/khanhnkq/Pinoria/releases"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="ti ti-brand-chrome"></i>
+            <span>Cài Đặt Cho Chrome — Miễn Phí</span>
+          </a>
+          <a
+            class="cta-button secondary-cta"
+            href="https://github.com/khanhnkq/Pinoria"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="ti ti-brand-github"></i>
+            <span>Xem Mã Nguồn GitHub</span>
+          </a>
+        </div>
+
+        <!-- Hero Visual Showcase (Cinematic Demo Video) -->
+        <div class="hero-visual-card">
+          <div class="browser-frame-bar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="browser-address">https://pinterest.com/feed</span>
+          </div>
+          <video
+            class="hero-media-video"
+            src="/Pinoria/assets/pinoria-demo-cinematic-hq-PPane_zT.mp4"
+            poster="/Pinoria/assets/hero-mockup-BmQQuSNI.jpg"
+            autoplay
+            muted
+            loop
+            playsinline
+            controls
+            preload="metadata"
+          >
+            <img
+              class="hero-media-image"
+              src="/Pinoria/assets/hero-mockup-BmQQuSNI.jpg"
+              alt="Pinoria Giao Diện Tải Nhanh 1-Click"
+              width="1280"
+              height="720"
+            />
+          </video>
+        </div>
+
+        <!-- Trust Highlights Strip -->
+        <div class="trust-strip">
+          <div class="trust-item">
+            <i class="ti ti-shield-check trust-icon"></i>
+            <div>
+              <strong>100% Riêng Tư &amp; Xử Lý Nội Bộ</strong>
+              <span>Không gửi dữ liệu lên cloud, bảo mật tuyệt đối.</span>
+            </div>
+          </div>
+
+          <div class="trust-item">
+            <i class="ti ti-volume trust-icon"></i>
+            <div>
+              <strong>Đồng Bộ Video &amp; Âm Thanh</strong>
+              <span>Ghép luồng MP4 trực tiếp trên máy, đầy đủ tiếng.</span>
+            </div>
+          </div>
+
+          <div class="trust-item">
+            <i class="ti ti-stack-2 trust-icon"></i>
+            <div>
+              <strong>Tải Trọn Bộ Bảng Hàng Loạt</strong>
+              <span>Tải hàng trăm pin chỉ với một lần bấm.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Video Downloader with Crisp Audio -->
+      <section id="video-audio" class="feature-block-section">
+        <div class="feature-grid-row">
+          <div class="feature-text-content">
+            <span class="section-tag"><i class="ti ti-movie"></i> TÍNH NĂNG ĐỘC QUYỀN</span>
+            <h2 class="section-heading">Tải Video Pinterest Đầy Đủ Âm Thanh Gốc Chất Lượng Cao</h2>
+            <p class="section-lead">
+              Bạn đã từng tải video Pinterest từ các website trực tuyến và thất vọng vì video <strong>bị mất tiếng</strong>?
+            </p>
+            <p class="section-body">
+              Pinterest lưu trữ hình ảnh và âm thanh thành 2 luồng HLS riêng biệt. Pinoria tự động bắt cả 2 luồng 
+              và ghép trực tiếp trong trình duyệt bằng Web API tăng tốc phần cứng. Bạn sẽ luôn nhận được file MP4 
+              1080p sắc nét với âm thanh trong trẻo mọi lúc mọi nơi.
+            </p>
+            <ul class="feature-checklist">
+              <li><i class="ti ti-check check-icon"></i> Tự động đồng bộ và ghép luồng hình ảnh &amp; âm thanh</li>
+              <li><i class="ti ti-check check-icon"></i> 100% xử lý offline qua tài liệu offscreen trong trình duyệt</li>
+              <li><i class="ti ti-check check-icon"></i> Không nén giảm chất lượng, giữ nguyên độ phân giải gốc</li>
+            </ul>
+          </div>
+          <div class="feature-visual-frame">
+            <img
+              src="/Pinoria/assets/feature-video-audio-B60pXluJ.jpg"
+              alt="Tải Video 1080p Đầy Đủ Âm Thanh Gốc"
+              width="960"
+              height="540"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Batch Board & Section Scanner -->
+      <section id="board-batch" class="feature-block-section reversed">
+        <div class="feature-grid-row">
+          <div class="feature-text-content">
+            <span class="section-tag"><i class="ti ti-layers-linked"></i> TỰ ĐỘNG HÓA HÀNG LOẠT</span>
+            <h2 class="section-heading">Tải 1-Click Toàn Bộ Bảng &amp; Phân Mục (Sections)</h2>
+            <p class="section-lead">
+              Không còn phải chuột phải tải từng ảnh một. Lưu trữ moodboard yêu thích của bạn chỉ trong vài giây.
+            </p>
+            <p class="section-body">
+              Pinoria tích hợp nút màu đỏ <strong>"Tải Toàn Bộ Bảng"</strong> ngay cạnh thanh tìm kiếm bảng của Pinterest. 
+              Chỉ cần một lần bấm, cơ chế quét thông minh sẽ tự động cuộn trang, loại bỏ trùng lặp và tải tuần tự từng pin 
+              vào thư mục gọn gàng.
+            </p>
+            <ul class="feature-checklist">
+              <li><i class="ti ti-check check-icon"></i> Tự động tạm dừng khi tương tác, cuộn trang an toàn theo nhịp con người</li>
+              <li><i class="ti ti-check check-icon"></i> Hiển thị thanh tiến trình trực quan thời gian thực (ví dụ: "Đang tải 48/50 mục")</li>
+              <li><i class="ti ti-check check-icon"></i> Hỗ trợ cả bộ sưu tập công khai lẫn bảng bí mật của riêng bạn</li>
+            </ul>
+          </div>
+          <div class="feature-visual-frame">
+            <img
+              src="/Pinoria/assets/feature-board-batch-DTD5L9O4.jpg"
+              alt="Tải Toàn Bộ Bảng và Phân Mục Pinterest"
+              width="960"
+              height="540"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Color-Coded Multi-Folder Sorting -->
+      <section id="features" class="feature-block-section">
+        <div class="feature-grid-row">
+          <div class="feature-text-content">
+            <span class="section-tag"><i class="ti ti-folder"></i> PHÂN LOẠI THÔNG MINH</span>
+            <h2 class="section-heading">Tùy Chỉnh Thư Mục Đích &amp; Phím Tắt Màu Nhanh Chóng</h2>
+            <p class="section-lead">
+              Giữ thư mục Downloads luôn ngăn nắp và khoa học ngay từ khoảnh khắc bạn bấm tải.
+            </p>
+            <p class="section-body">
+              Mở popup cài đặt của Pinoria để thiết lập tối đa 6 thư mục đích tùy ý (ví dụ: 
+              <em>Hình nền, Thiết kế UI, Tư liệu vẽ</em>). Mỗi thư mục được gán một mã màu riêng biệt. 
+              Khi di chuột lên bất kỳ Pin nào, chỉ cần bấm vào nút màu tương ứng là ảnh/video sẽ được chuyển ngay vào thư mục đó.
+            </p>
+            <ul class="feature-checklist">
+              <li><i class="ti ti-check check-icon"></i> Tự động phân loại file vào các thư mục con "Images", "Videos", và "GIFs"</li>
+              <li><i class="ti ti-check check-icon"></i> Phím tắt màu tiện lợi hiển thị trực tiếp trên thẻ hover của từng Pin</li>
+              <li><i class="ti ti-check check-icon"></i> Giữ nguyên nhãn thời gian và tên file gốc chuẩn xác</li>
+            </ul>
+          </div>
+          <div class="feature-visual-frame">
+            <img
+              src="/Pinoria/assets/feature-folder-sort-Cwht9-CB.jpg"
+              alt="Hệ Thống Phân Loại Thư Mục Theo Mã Màu"
+              width="960"
+              height="540"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Comparison Table vs Online Web Downloaders -->
+      <section id="comparison" class="comparison-section">
+        <div class="section-header-center">
+          <span class="section-tag"><i class="ti ti-scale"></i> BẢNG SO SÁNH TRỰC TIẾP</span>
+          <h2 class="section-heading">Pinoria vs. Các Website Tải Pinterest Trực Tuyến</h2>
+          <p class="section-lead">Tìm hiểu lý do tại sao hàng ngàn nhà thiết kế và người sáng tạo chuyển sang dùng tiện ích Pinoria.</p>
+        </div>
+
+        <div class="table-responsive-wrapper">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Tính năng / Khả năng</th>
+                <th class="highlight-col">Tiện ích Pinoria Chrome</th>
+                <th>Website Tải Trực Tuyến</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Tốc độ tải xuống</strong></td>
+                <td class="highlight-col"><span class="check"><i class="ti ti-check"></i></span> Nút tải 1-click khi hover trực tiếp trên Pinterest</td>
+                <td><span class="cross"><i class="ti ti-x"></i></span> Phải sao chép và dán link thủ công qua lại</td>
+              </tr>
+              <tr>
+                <td><strong>Không có quảng cáo</strong></td>
+                <td class="highlight-col"><span class="check"><i class="ti ti-check"></i></span> <strong>Không quảng cáo</strong>, không thư rác</td>
+                <td><span class="cross"><i class="ti ti-x"></i></span> Ngập tràn quảng cáo độc hại và chuyển hướng lừa đảo</td>
+              </tr>
+              <tr>
+                <td><strong>Chất lượng âm thanh video</strong></td>
+                <td class="highlight-col"><span class="check"><i class="ti ti-check"></i></span> Đầy đủ âm thanh gốc ghép trực tiếp trên máy</td>
+                <td><span class="cross"><i class="ti ti-x"></i></span> Thường xuyên bị câm tiếng hoặc lỗi stream HLS</td>
+              </tr>
+              <tr>
+                <td><strong>Tải trọn bộ bộ sưu tập</strong></td>
+                <td class="highlight-col"><span class="check"><i class="ti ti-check"></i></span> Tải toàn bộ bảng chỉ với 1-click</td>
+                <td><span class="cross"><i class="ti ti-x"></i></span> Chỉ tải thủ công từng ảnh một rất mất thời gian</td>
+              </tr>
+              <tr>
+                <td><strong>Bảo mật dữ liệu riêng tư</strong></td>
+                <td class="highlight-col"><span class="check"><i class="ti ti-check"></i></span> 100% Local-first khép kín trong trình duyệt</td>
+                <td><span class="cross"><i class="ti ti-x"></i></span> Tải URL và dữ liệu của bạn lên máy chủ bên thứ ba</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 6: Local-First Privacy Vault -->
+      <section class="feature-block-section reversed">
+        <div class="feature-grid-row">
+          <div class="feature-text-content">
+            <span class="section-tag"><i class="ti ti-shield-check"></i> BẢO MẬT HÀNG ĐẦU</span>
+            <h2 class="section-heading">Không Máy Chủ Trung Gian. Kiến Trúc 100% Local-First.</h2>
+            <p class="section-lead">
+              Thói quen duyệt web và nội dung bạn tải về là quyền riêng tư của chính bạn.
+            </p>
+            <p class="section-body">
+              Pinoria yêu cầu <strong>không đăng nhập, không cần tài khoản và không có máy chủ backend</strong> nào theo dõi bạn. 
+              Mọi quá trình tải, ghép luồng và lưu file đều thực hiện khép kín trên máy tính của bạn.
+            </p>
+            <div class="privacy-badges">
+              <span class="privacy-badge"><i class="ti ti-lock"></i> Không Thu Thập Dữ Liệu</span>
+              <span class="privacy-badge"><i class="ti ti-shield-check"></i> Chuẩn Bảo Mật Manifest V3</span>
+              <span class="privacy-badge"><i class="ti ti-brand-github"></i> Mã Nguồn Mở Trên GitHub</span>
+            </div>
+          </div>
+          <div class="feature-visual-frame">
+            <img
+              src="/Pinoria/assets/trust-privacy-vault-CUoStMCl.jpg"
+              alt="Bảo Mật Local-First Tuyệt Đối"
+              width="960"
+              height="540"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works Section -->
+      <section class="how-it-works-section">
+        <div class="section-header-center">
+          <span class="section-tag"><i class="ti ti-list-numbers"></i> QUY TRÌNH SỬ DỤNG</span>
+          <h2 class="section-heading">Bắt Đầu Tải Về Chỉ Trong Chưa Đầy 10 Giây</h2>
+          <p class="section-lead">Không cần thiết lập phức tạp. Pinoria hoạt động tự nhiên như một tính năng có sẵn của Pinterest.</p>
+        </div>
+
+        <div class="steps-cards-grid">
+          <div class="step-card">
+            <div class="step-badge-row">
+              <span class="step-icon-bubble"><i class="ti ti-download"></i></span>
+              <span class="step-number">01</span>
+            </div>
+            <h3 class="step-title">Cài Đặt Pinoria</h3>
+            <p class="step-description">
+              Cài đặt tiện ích từ Chrome Web Store hoặc GitHub Releases và ghim lên thanh công cụ trình duyệt của bạn.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-badge-row">
+              <span class="step-icon-bubble"><i class="ti ti-compass"></i></span>
+              <span class="step-number">02</span>
+            </div>
+            <h3 class="step-title">Lướt Pinterest Tự Nhiên</h3>
+            <p class="step-description">
+              Khám phá các bảng tin, kết quả tìm kiếm hoặc bộ sưu tập yêu thích mỗi ngày như bình thường.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-badge-row">
+              <span class="step-icon-bubble"><i class="ti ti-pointer"></i></span>
+              <span class="step-number">03</span>
+            </div>
+            <h3 class="step-title">Hover &amp; Tải Về Ngay</h3>
+            <p class="step-description">
+              Di chuột lên bất kỳ Pin nào để bấm tải 1-click, hoặc nhấn 'Tải Toàn Bộ Bảng' để lưu cả bộ sưu tập.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section id="faq" class="faq-section">
+        <div class="section-header-center">
+          <span class="section-tag"><i class="ti ti-help-circle"></i> CÂU HỎI THƯỜNG GẶP</span>
+          <h2 class="section-heading">Giải Đáp Mọi Thắc Mắc Về Pinoria</h2>
+        </div>
+
+        <div class="faq-accordion">
+          <details class="faq-item" open>
+            <summary class="faq-question">
+              <span>Pinoria có tải được video Pinterest có âm thanh (tiếng) không?</span>
+              <i class="ti ti-chevron-down faq-chevron"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                <strong>Có, chắc chắn 100%!</strong> Pinoria tích hợp bộ xử lý muxing âm thanh và hình ảnh client-side bằng Web API. 
+                Tiện ích tự động bắt luồng âm thanh và video riêng biệt từ CDN của Pinterest rồi ghép thành file MP4 
+                chuẩn chất lượng cao có đầy đủ tiếng.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Làm thế nào để tải toàn bộ bảng (board) Pinterest cùng một lúc?</span>
+              <i class="ti ti-chevron-down faq-chevron"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Bạn chỉ cần mở trang bảng hoặc phân mục (section) bất kỳ trên Pinterest. Pinoria hiển thị nút màu đỏ 
+                <strong>"Tải Toàn Bộ Bảng"</strong> ngay cạnh ô tìm kiếm bảng. Nhấn vào đó, tiện ích sẽ tự động cuộn qua các pin, 
+                lọc trùng lặp và tải tuần tự về thư mục máy tính của bạn.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Pinoria có tải được ảnh Pinterest với độ phân giải gốc cao nhất không?</span>
+              <i class="ti ti-chevron-down faq-chevron"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                <strong>Có.</strong> Pinoria tự động phân tích đường dẫn ảnh và lấy link gốc từ thư mục <code>originals/</code> 
+                của hệ thống máy chủ Pinterest CDN, đảm bảo bạn nhận được ảnh HD/4K sắc nét nhất thay vì ảnh thu nhỏ bị nén.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Pinoria có miễn phí và an toàn không? Có theo dõi dữ liệu không?</span>
+              <i class="ti ti-chevron-down faq-chevron"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Pinoria hoàn toàn miễn phí 100% và mã nguồn mở trên GitHub. Tiện ích hoạt động theo mô hình 
+                <strong>Local-First</strong>: không máy chủ trung gian, không thu thập nhật ký, không quảng cáo 
+                và không gửi bất kỳ dữ liệu nào của bạn ra ngoài.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Pinoria có hỗ trợ tải bảng bí mật (secret board) không?</span>
+              <i class="ti ti-chevron-down faq-chevron"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Có! Vì Pinoria chạy trực tiếp trong phiên duyệt web đang đăng nhập của bạn, tiện ích có thể tải bất kỳ 
+                bảng bí mật nào mà tài khoản của bạn được cấp quyền truy cập.
+              </p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- Final Bottom CTA Banner -->
+      <section class="final-cta-section">
+        <div class="final-cta-card">
+          <h2 class="final-cta-title">Nâng Cấp Trải Nghiệm Pinterest Của Bạn Ngay Hôm Nay</h2>
+          <p class="final-cta-subtitle">
+            Gia nhập cộng đồng người sáng tạo đang lưu ảnh 4K và video có âm thanh trong chớp mắt.
+          </p>
+          <div class="final-cta-buttons">
+            <a
+              class="cta-button primary-cta"
+              href="https://github.com/khanhnkq/Pinoria/releases"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="ti ti-brand-chrome"></i>
+              <span>Cài Đặt Pinoria — Miễn Phí</span>
+            </a>
+            <a
+              class="cta-button secondary-cta"
+              href="https://github.com/khanhnkq/Pinoria"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="ti ti-brand-github"></i>
+              <span>Kho Mã Nguồn GitHub</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="brand">
+            <img class="brand-logo" src="data:image/png;base64,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" width="28" height="28" alt="Pinoria Logo" />
+            <span class="brand-name">Pinoria</span>
+          </div>
+          <p class="footer-copy">
+            Tiện ích tải media Pinterest riêng tư, xử lý trực tiếp trên máy. 100% Miễn phí &amp; Mã nguồn mở.
+          </p>
+        </div>
+
+        <div class="footer-links-group">
+          <div class="footer-col">
+            <strong>Dự Án</strong>
+            <a href="https://github.com/khanhnkq/Pinoria/releases" target="_blank" rel="noopener noreferrer">Bản Phát Hành (v0.3.3)</a>
+            <a href="https://github.com/khanhnkq/Pinoria" target="_blank" rel="noopener noreferrer">Mã Nguồn GitHub</a>
+            <a href="https://github.com/khanhnkq/Pinoria/issues" target="_blank" rel="noopener noreferrer">Báo Cáo Sự Cố</a>
+          </div>
+          <div class="footer-col">
+            <strong>Chính Sách &amp; Pháp Lý</strong>
+            <a href="https://github.com/khanhnkq/Pinoria/blob/main/PRIVACY_POLICY.md" target="_blank" rel="noopener noreferrer">Chính Sách Bảo Mật</a>
+            <a href="https://github.com/khanhnkq/Pinoria/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Giấy Phép MIT</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="disclaimer">
+          <strong>Tuyên bố từ chối trách nhiệm:</strong> Pinoria là một tiện ích mở rộng trình duyệt độc lập mã nguồn mở. 
+          Pinoria không liên kết, không được tài trợ và không được chứng thực bởi Pinterest, Inc. "Pinterest" và logo Pinterest là thương hiệu đã đăng ký của Pinterest, Inc.
+        </p>
+        <p class="copyright">
+          © 2026 Pinoria. Xây dựng với <i class="ti ti-heart" style="color: var(--color-crimson-500); fill: currentColor; vertical-align: middle;"></i> dành cho cộng đồng sáng tạo toàn cầu.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

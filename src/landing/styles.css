@@ -147,6 +147,48 @@ a {
   color: #000000;
 }
 
+.lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: #ffffff;
+  border: 2px solid #cbd5e1;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.lang-switcher .lang-icon {
+  font-size: 15px;
+  color: #64748b;
+  margin-right: 2px;
+}
+
+.lang-btn {
+  color: #64748b;
+  text-decoration: none;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  transition: all 0.15s ease;
+  line-height: 1.2;
+}
+
+.lang-btn.active {
+  color: #ffffff;
+  background: var(--color-crimson-500);
+}
+
+.lang-btn:hover:not(.active) {
+  color: #0f172a;
+  background: #f1f5f9;
+}
+
+.lang-sep {
+  color: #cbd5e1;
+  font-size: 12px;
+}
+
 /* ==========================================================================
    Buttons (Pill-Shaped Flat Aesthetic - Bo tròn mềm mại)
    ========================================================================== */
@@ -303,10 +345,12 @@ a {
   border: 1px solid #cbd5e1;
 }
 
-.hero-media-image {
+.hero-media-image,
+.hero-media-video {
   width: 100%;
   height: auto;
   display: block;
+  background: #000000;
 }
 
 .trust-strip {
