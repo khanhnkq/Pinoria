@@ -1,3 +1,4 @@
+@import '@tabler/icons-webfont/dist/tabler-icons.min.css';
 @import './tokens.css';
 
 /* ==========================================================================
@@ -367,7 +368,9 @@ a {
 }
 
 .section-tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 800;
@@ -378,6 +381,11 @@ a {
   border-radius: 9999px;
   border: 1px solid #fecaca;
   margin-bottom: 16px;
+}
+
+.section-tag i {
+  font-size: 15px;
+  line-height: 1;
 }
 
 .section-heading {
@@ -412,20 +420,19 @@ a {
 }
 
 .feature-checklist li {
-  position: relative;
-  padding-left: 26px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   font-size: 15px;
   color: #1e293b;
   font-weight: 600;
 }
 
-.feature-checklist li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
+.feature-checklist .check-icon {
   color: var(--color-crimson-500);
-  font-weight: 800;
-  font-size: 16px;
+  font-size: 18px;
+  flex-shrink: 0;
+  line-height: 1;
 }
 
 .feature-visual-frame {
@@ -518,14 +525,30 @@ a {
 
 .check {
   color: #16a34a;
-  font-weight: bold;
-  margin-right: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.check i {
+  font-size: 18px;
+  line-height: 1;
 }
 
 .cross {
   color: #dc2626;
-  font-weight: bold;
-  margin-right: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.cross i {
+  font-size: 18px;
+  line-height: 1;
 }
 
 /* ==========================================================================
@@ -550,20 +573,34 @@ a {
   border: 2px solid #cbd5e1;
 }
 
-.step-number {
-  font-family: var(--font-mono);
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--color-crimson-500);
-  background: #fee2e2;
+.step-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.step-icon-bubble {
   width: 44px;
   height: 44px;
   border-radius: 50%;
+  background: var(--color-crimson-500);
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 18px;
-  border: 1px solid #fecaca;
+  font-size: 20px;
+}
+
+.step-number {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 800;
+  color: #475569;
+  background: #f1f5f9;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  border: 1px solid #e2e8f0;
 }
 
 .step-title {
@@ -623,15 +660,18 @@ a {
   display: none;
 }
 
-.faq-chevron::after {
-  content: '+';
-  font-size: 20px;
+.faq-chevron {
+  font-size: 22px;
   color: #64748b;
-  font-weight: 800;
+  transition: transform 0.25s ease, color 0.2s ease;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.faq-item[open] .faq-chevron::after {
-  content: '−';
+.faq-item[open] .faq-chevron {
+  transform: rotate(180deg);
   color: var(--color-crimson-500);
 }
 
