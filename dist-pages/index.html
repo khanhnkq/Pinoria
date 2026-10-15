@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pinoria — Better Pinterest Video & Image Downloader | Chrome Extension</title>
+    
+    <!-- Primary SEO Meta Tags -->
+    <meta
+      name="title"
+      content="Pinoria — Better Pinterest Video & Image Downloader | Chrome Extension"
+    />
+    <meta
+      name="description"
+      content="Download Pinterest videos with sound, original HD images, and entire boards in 1-click. Free, private, clean, and local-first Chrome extension with zero ads."
+    />
+    <meta
+      name="keywords"
+      content="pinterest video downloader, download pinterest video with sound, pinterest image downloader 4k, download pinterest board, pinterest extension chrome, pinoria"
+    />
+    <meta name="author" content="Pinoria" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://khanhnkq.github.io/Pinoria/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://khanhnkq.github.io/Pinoria/" />
+    <meta
+      property="og:title"
+      content="Pinoria — Better Pinterest Video & Image Downloader"
+    />
+    <meta
+      property="og:description"
+      content="Download Pinterest videos with audio, 4K images, and entire boards in 1-click. Free & 100% private."
+    />
+    <meta property="og:image" content="/Pinoria/assets/hero-mockup-BmQQuSNI.jpg" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://khanhnkq.github.io/Pinoria/" />
+    <meta
+      name="twitter:title"
+      content="Pinoria — Better Pinterest Video & Image Downloader"
+    />
+    <meta
+      name="twitter:description"
+      content="Save original Pinterest photos, videos with sound, and full boards. 100% Free & Local-first."
+    />
+    <meta name="twitter:image" content="/Pinoria/assets/hero-mockup-BmQQuSNI.jpg" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/Pinoria/assets/icon-32-B6PVtV4R.png" />
+    <link rel="apple-touch-icon" href="/Pinoria/assets/icon-128-PvLyLTH8.png" />
+
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+
+    <!-- JSON-LD Structured Data: SoftwareApplication & FAQPage -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "SoftwareApplication",
+            "name": "Pinoria - Better Pinterest Video & Image Downloader",
+            "operatingSystem": "Chromium, Google Chrome, Brave, Edge",
+            "applicationCategory": "BrowserApplication",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "ratingCount": "128"
+            },
+            "description": "Download Pinterest videos with sound, original HD images, and full boards. Clean, fast, and smart media downloader for Pinterest."
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Can Pinoria download Pinterest videos with sound?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes! Unlike most online tools that produce muted files, Pinoria captures the official HLS media streams and automatically muxes high-quality audio and video locally inside your browser."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do I download an entire Pinterest board at once?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Pinoria adds a native 'Download Board' button next to the search bar on any board page. Click it to automatically scan all pins, skip duplicates, and save them sequentially into your local Downloads folder."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does Pinoria download original resolution images?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Pinoria directly resolves media to Pinterest's full-resolution CDN originals rather than low-resolution feed thumbnails."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is Pinoria safe, free, and private?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Pinoria is 100% free and open-source. It requires zero account creation, runs with zero analytics, and executes all downloads locally on your device without passing data through external servers."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+    <link rel="stylesheet" crossorigin href="/Pinoria/assets/index-BvYv4R1L.css">
+  </head>
+  <body>
+    <!-- Top Glowing Ambient Effect -->
+    <div class="ambient-glow" aria-hidden="true"></div>
+
+    <!-- Header / Navigation -->
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="./" aria-label="Pinoria Homepage">
+          <img class="brand-logo" src="/Pinoria/assets/icon-128-PvLyLTH8.png" width="40" height="40" alt="Pinoria Logo" />
+          <span class="brand-name">Pinoria</span>
+          <span class="brand-version">v0.3.3</span>
+        </a>
+
+        <nav class="nav-menu" aria-label="Main Navigation">
+          <a class="nav-link" href="#features">Features</a>
+          <a class="nav-link" href="#video-audio">Audio Video</a>
+          <a class="nav-link" href="#board-batch">Board Downloader</a>
+          <a class="nav-link" href="#comparison">Why Pinoria</a>
+          <a class="nav-link" href="#faq">FAQ</a>
+        </nav>
+
+        <div class="header-actions">
+          <a
+            class="cta-button header-cta"
+            href="https://github.com/khanhnkq/Pinoria/releases"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg class="cta-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
+            </svg>
+            <span>Add to Chrome — Free</span>
+          </a>
+          <a
+            class="icon-button"
+            href="https://github.com/khanhnkq/Pinoria"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Pinoria Source on GitHub"
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-container">
+      <!-- Section 1: Hero Section -->
+      <section class="hero-section">
+        <div class="badge-pill">
+          <span class="badge-dot"></span>
+          <span>100% Free • No Ads • Offline Local-First • Manifest V3</span>
+        </div>
+
+        <h1 class="hero-title">
+          The Smart, Clean Downloader for <span class="gradient-text">Pinterest</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Download original HD photos, full MP4 videos with crystal-clear audio, and entire boards in 1-click. 
+          Blends seamlessly into your Pinterest feed with zero intrusive ads or redirects.
+        </p>
+
+        <div class="hero-cta-group">
+          <a
+            class="cta-button primary-cta"
+            href="https://github.com/khanhnkq/Pinoria/releases"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+            </svg>
+            <span>Add to Chrome — It's Free</span>
+          </a>
+          <a
+            class="cta-button secondary-cta"
+            href="https://github.com/khanhnkq/Pinoria"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+            </svg>
+            <span>Read on GitHub</span>
+          </a>
+        </div>
+
+        <!-- Hero Visual Showcase -->
+        <div class="hero-visual-card">
+          <div class="browser-frame-bar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="browser-address">https://pinterest.com/feed</span>
+          </div>
+          <img
+            class="hero-media-image"
+            src="/Pinoria/assets/hero-mockup-BmQQuSNI.jpg"
+            alt="Pinoria 1-Click Quick Download Hero Mockup"
+            width="1280"
+            height="720"
+            loading="eager"
+          />
+        </div>
+
+        <!-- Trust Highlights Strip -->
+        <div class="trust-strip">
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="var(--color-crimson-500)">
+              <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+            </svg>
+            <div>
+              <strong>100% Private & Local</strong>
+              <span>Zero telemetry. No cloud uploads.</span>
+            </div>
+          </div>
+
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="var(--color-crimson-500)">
+              <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+            </svg>
+            <div>
+              <strong>Video + Audio Sync</strong>
+              <span>Full MP4 muxed locally with audio.</span>
+            </div>
+          </div>
+
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="var(--color-crimson-500)">
+              <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/>
+            </svg>
+            <div>
+              <strong>Batch Board Downloader</strong>
+              <span>Export 100+ pins with one click.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Video Downloader with Crisp Audio -->
+      <section id="video-audio" class="feature-block-section">
+        <div class="feature-grid-row">
+          <div class="feature-text-content">
+            <span class="section-tag">KILLER FEATURE</span>
+            <h2 class="section-heading">Download Pinterest Videos with Full High-Fidelity Audio</h2>
+            <p class="section-lead">
+              Ever downloaded a Pinterest video from random online websites only to discover it had <strong>no sound</strong>?
+            </p>
+            <p class="section-body">
+              Pinterest separates audio and video into isolated HLS streams. Pinoria automatically captures both streams 
+              and merges them locally inside your browser using hardware-accelerated Web APIs. You get a pristine, 
+              original 1080p MP4 file with crystal-clear audio every single time.
+            </p>
+            <ul class="feature-checklist">
+              <li>Automatic audio & video stream synchronization</li>
+              <li>100% offline processing via native browser offscreen documents</li>
+              <li>Zero compression or quality loss</li>
+            </ul>
+          </div>
+          <div class="feature-visual-frame">
+            <img
+              src="/Pinoria/assets/feature-video-audio-B60pXluJ.jpg"
+              alt="1080p Video Downloader with Crisp Audio"
+              width="960"
+              height="540"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Batch Board & Section Scanner -->
+      <section id="board-batch" class="feature-block-section reversed">
+        <div class="feature-grid-row">
+          <div class="feature-text-content">
+            <span class="section-tag">BATCH AUTOMATION</span>
+            <h2 class="section-heading">1-Click Batch Download for Entire Boards & Sections</h2>
+            <p class="section-lead">
+              Stop right-clicking pins one by one. Archive your favorite aesthetic moodboards effortlessly.
+            </p>
+            <p class="section-body">
+              Pinoria embeds a native red <strong>"Download Board"</strong> button right next to the Pinterest board search bar. 
+              Click once, and Pinoria's smart virtual feed scanner scrolls, eliminates duplicates, and downloads every item 
+              sequentially into an organized folder.
+            </p>
+            <ul class="feature-checklist">
+              <li>Auto-pauses when you interact, scrolls in safe human batches</li>
+              <li>Visible live progress indicators (e.g., "Downloading 48/50 items")</li>
+              <li>Supports both public collections and your private secret boards</li>
+            </ul>
+          </div>
+          <div class="feature-visual-frame">
+            <img
+              src="/Pinoria/assets/feature-board-batch-DTD5L9O4.jpg"
+              alt="1-Click Batch Board and Section Downloader"
+              width="960"
+              height="540"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Color-Coded Multi-Folder Sorting -->
+      <section id="features" class="feature-block-section">
+        <div class="feature-grid-row">
+          <div class="feature-text-content">
+            <span class="section-tag">SMART ORGANIZATION</span>
+            <h2 class="section-heading">Custom Destination Folders & Color Shortcuts</h2>
+            <p class="section-lead">
+              Keep your downloads folder clean and categorized from the moment you click download.
+            </p>
+            <p class="section-body">
+              Open the Pinoria extension popup to configure up to 6 custom destination directories (e.g., 
+              <em>Wallpapers, UI Design, Art References</em>). Each folder is assigned a distinct color code. 
+              Hover over any Pin, click your desired color button, and Pinoria will instantly file it where it belongs.
+            </p>
+            <ul class="feature-checklist">
+              <li>Auto-categorizes media into "Images", "Videos", and "GIFs" subfolders</li>
+              <li>Instant color shortcuts right on the Pin hover card</li>
+              <li>Preserves original file timestamps and naming</li>
+            </ul>
+          </div>
+          <div class="feature-visual-frame">
+            <img
+              src="/Pinoria/assets/feature-folder-sort-Cwht9-CB.jpg"
+              alt="Multi-Folder Color Sorting System"
+              width="960"
+              height="540"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Comparison Table vs Online Web Downloaders -->
+      <section id="comparison" class="comparison-section">
+        <div class="section-header-center">
+          <span class="section-tag">WHY PINORIA WINS</span>
+          <h2 class="section-heading">Pinoria vs. Cluttered Online Web Downloaders</h2>
+          <p class="section-lead">See why thousands of creators and curators switched to our native browser extension.</p>
+        </div>
+
+        <div class="comparison-visual-banner">
+          <img
+            src="/Pinoria/assets/comparison-clean-fast-DRnDdNm-.jpg"
+            alt="Pinoria Modern Clean Solution vs Old Spammy Downloaders"
+            width="1280"
+            height="720"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="comparison-table-wrapper">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Feature Comparison</th>
+                <th class="highlight-col">Pinoria Extension</th>
+                <th>Online Web Downloaders</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Download Method</strong></td>
+                <td class="highlight-col"><span class="check">✓</span> 1-Click native hover on any Pin</td>
+                <td><span class="cross">✕</span> Copy-paste URLs back and forth</td>
+              </tr>
+              <tr>
+                <td><strong>Intrusive Popups & Ads</strong></td>
+                <td class="highlight-col"><span class="check">✓</span> <strong>Zero ads</strong>, zero spam</td>
+                <td><span class="cross">✕</span> Filled with scam ads and redirects</td>
+              </tr>
+              <tr>
+                <td><strong>Video with Sound</strong></td>
+                <td class="highlight-col"><span class="check">✓</span> Full original audio synced locally</td>
+                <td><span class="cross">✕</span> Often muted or fails on HLS</td>
+              </tr>
+              <tr>
+                <td><strong>Batch Board Downloads</strong></td>
+                <td class="highlight-col"><span class="check">✓</span> Entire boards exported in 1-click</td>
+                <td><span class="cross">✕</span> Manual 1-by-1 download only</td>
+              </tr>
+              <tr>
+                <td><strong>Privacy & Security</strong></td>
+                <td class="highlight-col"><span class="check">✓</span> 100% Local-first in your browser</td>
+                <td><span class="cross">✕</span> Uploads URLs to third-party servers</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 6: Local-First Privacy Vault -->
+      <section class="feature-block-section reversed">
+        <div class="feature-grid-row">
+          <div class="feature-text-content">
+            <span class="section-tag">PRIVACY FIRST</span>
+            <h2 class="section-heading">Zero Cloud Uploads. 100% Local-First Architecture.</h2>
+            <p class="section-lead">
+              Your browsing habits and downloaded content are nobody else's business.
+            </p>
+            <p class="section-body">
+              Pinoria requires <strong>no login, no accounts, and no backend servers</strong>. All stream assembly, 
+              media fetching, and folder routing occur exclusively on your own machine. We do not track, analyze, or monetize your data.
+            </p>
+            <div class="privacy-badges">
+              <span class="privacy-badge">🔒 Zero Analytics</span>
+              <span class="privacy-badge">🛡️ Manifest V3 Compliant</span>
+              <span class="privacy-badge">⚡ Open Source on GitHub</span>
+            </div>
+          </div>
+          <div class="feature-visual-frame">
+            <img
+              src="/Pinoria/assets/trust-privacy-vault-CUoStMCl.jpg"
+              alt="100% Local-First Privacy Vault"
+              width="960"
+              height="540"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works Section -->
+      <section class="how-it-works-section">
+        <div class="section-header-center">
+          <span class="section-tag">HOW IT WORKS</span>
+          <h2 class="section-heading">Start Downloading in Under 10 Seconds</h2>
+          <p class="section-lead">No complicated setups. Pinoria feels like a built-in feature of Pinterest.</p>
+        </div>
+
+        <div class="steps-cards-grid">
+          <div class="step-card">
+            <div class="step-number">01</div>
+            <h3 class="step-title">Install Pinoria</h3>
+            <p class="step-description">
+              Install the extension from Chrome Web Store or GitHub Releases and pin it to your browser toolbar.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">02</div>
+            <h3 class="step-title">Browse Naturally</h3>
+            <p class="step-description">
+              Browse your favorite Pinterest feeds, search results, or boards as you normally do every day.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">03</div>
+            <h3 class="step-title">Hover & Download</h3>
+            <p class="step-description">
+              Hover over any Pin to reveal 1-click download buttons, or click 'Download Board' to grab the whole collection.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section id="faq" class="faq-section">
+        <div class="section-header-center">
+          <span class="section-tag">FREQUENTLY ASKED QUESTIONS</span>
+          <h2 class="section-heading">Got Questions? We've Got Answers.</h2>
+        </div>
+
+        <div class="faq-accordion">
+          <details class="faq-item" open>
+            <summary class="faq-question">
+              <span>Can Pinoria download Pinterest videos with sound?</span>
+              <span class="faq-chevron"></span>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                <strong>Yes, absolutely!</strong> Pinoria has a dedicated client-side audio/video muxing engine built 
+                with Web APIs. It captures the separate audio and video tracks from Pinterest CDN and stitches them into 
+                a standard high-definition MP4 with crystal-clear audio.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>How do I download an entire Pinterest board at once?</span>
+              <span class="faq-chevron"></span>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Simply navigate to any board or section page on Pinterest. Pinoria places a clean red <strong>"Download Board"</strong> 
+                button right next to the board search input. Click it, and Pinoria will automatically scroll through the board, 
+                detect all pins, eliminate duplicates, and download them sequentially.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Does Pinoria download images in original quality?</span>
+              <span class="faq-chevron"></span>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                <strong>Yes.</strong> Pinoria inspects the image URL and resolves it to the largest available original asset 
+                hosted on Pinterest's official media CDN (<code>originals/</code> directory), guaranteeing that you get 
+                crisp HD/4K resolution rather than feed thumbnails.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Is Pinoria free and safe? Does it track my activity?</span>
+              <span class="faq-chevron"></span>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Pinoria is 100% free and open-source on GitHub. It operates completely <strong>local-first</strong>: 
+                zero external servers, zero analytics, and zero tracking. Your data and downloads never leave your browser.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Does Pinoria work with private (secret) boards?</span>
+              <span class="faq-chevron"></span>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Yes! Because Pinoria runs directly in your active browser session as an extension, it can seamlessly 
+                download any secret or private board that your logged-in account has permission to view.
+              </p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- Final Bottom CTA Banner -->
+      <section class="final-cta-section">
+        <div class="final-cta-card">
+          <h2 class="final-cta-title">Upgrade Your Pinterest Experience Today</h2>
+          <p class="final-cta-subtitle">
+            Join thousands of designers, creators, and curators saving high-res images and videos with audio in seconds.
+          </p>
+          <div class="final-cta-buttons">
+            <a
+              class="cta-button primary-cta"
+              href="https://github.com/khanhnkq/Pinoria/releases"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>Get Pinoria — Free Extension</span>
+            </a>
+            <a
+              class="cta-button secondary-cta"
+              href="https://github.com/khanhnkq/Pinoria"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>GitHub Repository</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="brand">
+            <img class="brand-logo" src="data:image/png;base64,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" width="28" height="28" alt="Pinoria Logo" />
+            <span class="brand-name">Pinoria</span>
+          </div>
+          <p class="footer-copy">
+            A private, local-first media downloader crafted for Pinterest users. 100% Free & Open Source.
+          </p>
+        </div>
+
+        <div class="footer-links-group">
+          <div class="footer-col">
+            <strong>Project</strong>
+            <a href="https://github.com/khanhnkq/Pinoria/releases" target="_blank" rel="noopener noreferrer">Releases (v0.3.3)</a>
+            <a href="https://github.com/khanhnkq/Pinoria" target="_blank" rel="noopener noreferrer">Source Code</a>
+            <a href="https://github.com/khanhnkq/Pinoria/issues" target="_blank" rel="noopener noreferrer">Report an Issue</a>
+          </div>
+          <div class="footer-col">
+            <strong>Legal & Safety</strong>
+            <a href="https://github.com/khanhnkq/Pinoria/blob/main/PRIVACY_POLICY.md" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+            <a href="https://github.com/khanhnkq/Pinoria/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="disclaimer">
+          <strong>Disclaimer:</strong> Pinoria is an independent open-source browser extension. Pinoria is not affiliated with, 
+          sponsored by, or endorsed by Pinterest, Inc. "Pinterest" and the Pinterest logo are registered trademarks of Pinterest, Inc.
+        </p>
+        <p class="copyright">
+          © 2026 Pinoria. Built with ❤️ for creative collectors worldwide.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

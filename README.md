@@ -1,6 +1,6 @@
-# Pinoria — Private & Local-first Pinterest Downloader
+# Pinoria — Better Pinterest Video & Image Downloader
 
-**Pinoria** là một Chrome Extension (Manifest V3) chạy hoàn toàn cục bộ, bảo mật và miễn phí, giúp bạn tải ảnh, video (kèm âm thanh), ảnh động (GIF) chất lượng cao trên Pinterest. Extension được thiết kế tích hợp mượt mà vào giao diện của Pinterest như một tính năng có sẵn (native).
+**Pinoria** là một Chrome Extension (Manifest V3) thông minh, sạch sẽ và chạy hoàn toàn cục bộ, giúp bạn tải video Pinterest (kèm âm thanh), ảnh độ phân giải gốc HD/4K và ảnh động (GIF). Extension được thiết kế tích hợp mượt mà vào giao diện của Pinterest như một tính năng có sẵn (native).
 
 ---
 

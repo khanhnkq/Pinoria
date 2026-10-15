@@ -5,10 +5,10 @@ const firefoxExtensionId = process.env.FIREFOX_EXTENSION_ID?.trim() || 'pinoria@
 
 export default defineManifest({
   manifest_version: 3,
-  name: 'Pinoria',
+  name: 'Pinoria - Better Pinterest Video & Image Downloader',
   short_name: 'Pinoria',
-  description: 'Download Pinterest media locally with native-feeling controls.',
-  version: '0.3.1',
+  description: 'Download videos with sound, original HD images, and full boards. Clean, fast, and smart media downloader for Pinterest.',
+  version: '0.3.3',
   icons: {
     16: 'icons/icon-16.png',
     32: 'icons/icon-32.png',
@@ -60,7 +60,7 @@ export default defineManifest({
             id: firefoxExtensionId,
             // Pinoria is local-first: no accounts, analytics, or remote servers.
             data_collection_permissions: { required: ['none'] },
-            strict_min_version: '128.0',
+            strict_min_version: '0.3.3',
           },
         },
       }
