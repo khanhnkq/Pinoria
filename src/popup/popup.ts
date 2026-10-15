@@ -48,14 +48,10 @@ function getFolderInitial(folder: string, index: number): string {
   return lastSegment?.charAt(0).toUpperCase() || String(index + 1)
 }
 
-function createDeleteIcon(): SVGSVGElement {
-  const namespace = 'http://www.w3.org/2000/svg'
-  const icon = document.createElementNS(namespace, 'svg')
-  icon.setAttribute('viewBox', '0 0 24 24')
+function createDeleteIcon(): HTMLElement {
+  const icon = document.createElement('i')
+  icon.className = 'ti ti-trash'
   icon.setAttribute('aria-hidden', 'true')
-  const path = document.createElementNS(namespace, 'path')
-  path.setAttribute('d', 'M4 7h16M9 7V4h6v3m-8 0 1 13h8l1-13M10 11v5m4-5v5')
-  icon.append(path)
   return icon
 }
 

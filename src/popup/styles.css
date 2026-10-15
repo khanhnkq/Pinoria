@@ -1,3 +1,5 @@
+@import '@tabler/icons-webfont/dist/tabler-icons.min.css';
+
 :root {
   color: #17202c;
   background: #ffffff;
@@ -207,7 +209,7 @@ button:disabled { cursor: not-allowed; opacity: 0.45; }
 }
 
 .delete-button:hover:not(:disabled) { color: #c82b40; background: #fff0f2; }
-.delete-button svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.9; }
+.delete-button i { font-size: 18px; line-height: 1; }
 
 .add-button, .primary-button {
   width: 100%;
@@ -229,9 +231,8 @@ button:disabled { cursor: not-allowed; opacity: 0.45; }
 
 .add-button:hover:not(:disabled) { color: var(--blue-dark); border-color: #a9cdf2; background: #f1f8ff; }
 
-.add-icon {
+.add-button i {
   font-size: 17px;
-  font-weight: 500;
   line-height: 1;
 }
 
@@ -246,7 +247,7 @@ button:disabled { cursor: not-allowed; opacity: 0.45; }
   box-shadow: 0 12px 24px rgba(22, 136, 248, 0.23);
 }
 
-.primary-button svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
+.primary-button i { font-size: 20px; line-height: 1; }
 .primary-button:hover:not(:disabled) { filter: brightness(0.97); box-shadow: 0 14px 28px rgba(22, 136, 248, 0.28); }
 .primary-button:active:not(:disabled) { translate: 0 1px; scale: 0.99; }
 
